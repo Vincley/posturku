@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Posturku</string>
+
+    <string name="signup">Sign Up</string>
+    <string name="login">Log In</string>
+    <string name="message_welcome_page">Join us to unite all clothing manufacturers in Indonesia with KoKiBe!</string>
+    <string name="title_welcome_page">Welcome to KoKibe!</string>
+    <string name="title_signup_page">Complete your personal data below</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="message_login_page">Enter your data first</string>
+    <string name="title_login_page">Ready to find clothing manufacturers?</string>
+    <string name="name">Name</string>
+    <string name="copyright">© 2021 KoKibe</string>
+    <string name="message_main_page">Find the right clothing manufacturer on KoKiBe.</string>
+    <string name="greeting">Hello %1$s,</string>
+    <string name="logout">Logout</string>
+    <string name="go_to_map">Go to map</string>
+    <string name="list_story">View Story</string>
+    <string name="menu_1">Add New Story</string>
+
+    <string name="camera_x">CameraX</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="upload">Upload</string>
+
+    <string name="appwidget_text">STAR WARS BANNER</string>
+    <string name="empty_text">NO DATA</string>
+    <string name="emailerror">Email not valid</string>
+    <string name="passError">Minimum of 8 characters required</string>
+
+    <!-- For NewCeritaActivity -->
+    <string name="permission_denied">Failed to obtain permission to access camera.</string>
+    <string name="choose_picture">Choose a Picture</string>
+    <string name="insert_image_file">Please insert the image file first</string>
+    <string name="camera_error">Failed to open camera.</string>
+    <string name="description_empty_error">Description can\'t be empty</string>
+
+    <!-- For SignupActivity -->
+    <string name="enter_name">Please enter your name</string>
+    <string name="enter_email">Please enter your email</string>
+    <string name="enter_password">Please enter your password</string>
+
+    <!-- For CameraActivity -->
+    <string name="error_getting_image_orientation">Error getting image orientation: %1$s</string>
+
+    <!-- For MapsActivity -->
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satellite</string>
+    <string name="terrain_type">Terrain</string>
+    <string name="hybrid_type">Hybrid</string>
+
+    <string name="retry">Try Again</string>
+</resources>

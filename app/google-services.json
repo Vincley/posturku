@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "136450958642",
+    "project_id": "posturku-46f8e",
+    "storage_bucket": "posturku-46f8e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136450958642:android:7b647b64dc4075d89da32b",
+        "android_client_info": {
+          "package_name": "com.capstone.posturku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "136450958642-0c18pf2on5mjvdrp9el2ndjsafu2dfm7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBHV0co4JX-pyaGmqgGdGrNHC5pFlQWXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "136450958642-0c18pf2on5mjvdrp9el2ndjsafu2dfm7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
