@@ -10,4 +10,8 @@
 
     <color name="navi">#2D3D4F</color>
 
+    <!-- For DashboardActivity -->
+    <color name="green">#26BEA4</color>
+    <color name="purple">#0A134C</color>
+
 </resources>

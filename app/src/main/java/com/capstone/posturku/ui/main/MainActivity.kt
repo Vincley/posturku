@@ -19,7 +19,6 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.R
 import com.capstone.posturku.ViewModelFactory
-import com.capstone.posturku.databinding.ActivityMainBinding
 import com.capstone.posturku.data.UserPreference
 import com.capstone.posturku.ui.welcome.WelcomeActivity
 import android.provider.Settings
@@ -28,6 +27,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.exifinterface.media.ExifInterface
+import com.capstone.posturku.databinding.ActivityMainBinding
 import com.capstone.posturku.ui.camera.CameraActivity
 import com.capstone.posturku.utils.rotateBitmap
 import java.io.File
