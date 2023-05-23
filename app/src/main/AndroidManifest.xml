@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Posturku"
         tools:targetApi="31">
         <activity
+            android:name=".PoseActivity"
+            android:exported="false" />
+        <activity
             android:name=".DashboardActivity"
             android:exported="false" />
         <activity
