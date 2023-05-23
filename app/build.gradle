@@ -86,4 +86,10 @@ dependencies {
     implementation "androidx.camera:camera-view:${camerax_version}"
     implementation 'androidx.exifinterface:exifinterface:1.3.3'
     //endregion
+
+    //region Tensorflow
+    implementation 'org.tensorflow:tensorflow-lite:2.5.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.5.0'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.3.0'
+    //endregion
 }
