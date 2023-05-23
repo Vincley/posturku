@@ -16,6 +16,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import com.capstone.posturku.R
 import com.capstone.posturku.data.repository.AuthRepository
 import com.capstone.posturku.ViewModelFactory
 import com.capstone.posturku.databinding.ActivityLoginBinding
@@ -26,6 +27,13 @@ import com.capstone.posturku.model.LoginResult
 import com.capstone.posturku.ui.custom.EmailEditTextCustom
 import com.capstone.posturku.ui.custom.PassEditTextCustom
 import com.capstone.posturku.ui.main.MainActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -38,6 +46,11 @@ class LoginActivity : AppCompatActivity() {
 
     // Creating firebaseAuth object
     lateinit var auth: FirebaseAuth
+
+    // Login by Google
+    lateinit var mGoogleSignInClient: GoogleSignInClient
+    val Req_Code:Int=123
+    private lateinit var firebaseAuth: FirebaseAuth
 
     private var isEmailValid = false
     private var isPasssValid = false
@@ -52,8 +65,8 @@ class LoginActivity : AppCompatActivity() {
         setupAction()
         playAnimation()
 
-        // initialising Firebase auth object
-        auth = FirebaseAuth.getInstance()
+        setupLoginByGoogle()
+
     }
 
     private fun setupView() {
@@ -102,6 +115,24 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.getUser().observe(this, { user ->
             this.user = user
         })
+    }
+
+    private fun setupLoginByGoogle(){
+        FirebaseApp.initializeApp(this)
+
+        // initialising Firebase auth object
+        auth = FirebaseAuth.getInstance()
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        mGoogleSignInClient= GoogleSignIn.getClient(this,gso)
+
+
+        binding.loginButton2.setOnClickListener{
+            signInGoogle()
+        }
     }
 
     private fun setupAction() {
@@ -155,6 +186,35 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private  fun signInGoogle(){
+
+        val signInIntent: Intent =mGoogleSignInClient.signInIntent
+        startActivityForResult(signInIntent,Req_Code)
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==Req_Code){
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleResult(task)
+//            firebaseAuthWithGoogle(account!!)
+        }
+    }
+
+    private fun handleResult(completedTask: Task<GoogleSignInAccount>){
+        try {
+            val account: GoogleSignInAccount? =completedTask.getResult(ApiException::class.java)
+            if (account != null) {
+                val result = LoginResult("", "", "")
+                loginViewModel.login(result)
+                callAlert()
+            }
+        } catch (e: ApiException){
+            Toast.makeText(this,e.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun callAlert(){
         AlertDialog.Builder(this).apply {
             setTitle("Yeah!")
@@ -185,9 +245,10 @@ class LoginActivity : AppCompatActivity() {
         val passwordTextView = ObjectAnimator.ofFloat(binding.passwordTextView, View.ALPHA, 1f).setDuration(500)
         val passwordEditTextLayout = ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 1f).setDuration(500)
         val login = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 1f).setDuration(500)
+        val login2 = ObjectAnimator.ofFloat(binding.loginButton2, View.ALPHA, 1f).setDuration(500)
 
         AnimatorSet().apply {
-            playSequentially(title, message, emailTextView, emailEditTextLayout, passwordTextView, passwordEditTextLayout, login)
+            playSequentially(title, message, emailTextView, emailEditTextLayout, passwordTextView, passwordEditTextLayout, login, login2)
             startDelay = 500
         }.start()
     }
