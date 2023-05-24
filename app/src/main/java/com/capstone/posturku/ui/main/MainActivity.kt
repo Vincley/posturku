@@ -29,6 +29,7 @@ import androidx.core.content.ContextCompat
 import androidx.exifinterface.media.ExifInterface
 import com.capstone.posturku.databinding.ActivityMainBinding
 import com.capstone.posturku.ui.camera.CameraActivity
+import com.capstone.posturku.ui.camera.pose.PoseActivity
 import com.capstone.posturku.utils.rotateBitmap
 import java.io.File
 
@@ -137,7 +138,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startCameraX() {
-        val intent = Intent(this, CameraActivity::class.java)
+//        val intent = Intent(this, CameraActivity::class.java)
+        val intent = Intent(this, PoseActivity::class.java)
         launcherIntentCameraX.launch(intent)
     }
 
