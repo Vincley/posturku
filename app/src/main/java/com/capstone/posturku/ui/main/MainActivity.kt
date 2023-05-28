@@ -30,6 +30,7 @@ import androidx.exifinterface.media.ExifInterface
 import com.capstone.posturku.databinding.ActivityMainBinding
 import com.capstone.posturku.ui.camera.CameraActivity
 import com.capstone.posturku.ui.camera.pose.PoseActivity
+import com.capstone.posturku.ui.welcome.WelcomeActivity1
 import com.capstone.posturku.utils.rotateBitmap
 import java.io.File
 
@@ -83,7 +84,7 @@ class MainActivity : AppCompatActivity() {
             if (user.isLogin){
                 binding.nameTextView.text = getString(R.string.greeting, user.name)
             } else {
-                startActivity(Intent(this, WelcomeActivity::class.java))
+                startActivity(Intent(this, WelcomeActivity1::class.java))
                 finish()
             }
         })
