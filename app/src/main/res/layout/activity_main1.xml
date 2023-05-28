@@ -434,14 +434,14 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/bottom_btn3" />
+                        app:srcCompat="@drawable/bottom_btn2" />
 
                     <TextView
                         android:id="@+id/bottomtextView151"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Wallet"
+                        android:text="Profile"
                         android:textAlignment="center" />
                 </LinearLayout>
 
@@ -480,14 +480,14 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/bottom_btn2" />
+                        app:srcCompat="@drawable/bottom_btn4" />
 
                     <TextView
                         android:id="@+id/bottomtextView153"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Profile"
+                        android:text="Settings"
                         android:textAlignment="center" />
                 </LinearLayout>
 
@@ -503,7 +503,7 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/bottom_btn4" />
+                        app:srcCompat="@drawable/logout" />
 
                     <TextView
                         android:id="@+id/bottomtextView154"
