@@ -85,7 +85,8 @@
             android:padding="8dp"
             android:textColor="#8e8e8e"
             android:textColorHint="#8e8e8e"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            />
 
         <TextView
             android:id="@+id/textView6"
