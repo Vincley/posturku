@@ -12,6 +12,7 @@ import com.capstone.posturku.databinding.ActivityWelcomeBinding
 import com.capstone.posturku.ui.login.LoginActivity
 import com.capstone.posturku.ui.login.LoginActivity1
 import com.capstone.posturku.ui.signup.SignupActivity
+import com.capstone.posturku.ui.signup.SignupActivity1
 
 
 class WelcomeActivity1 : AppCompatActivity() {
@@ -54,13 +55,13 @@ class WelcomeActivity1 : AppCompatActivity() {
 
 
         binding.constraintLayout3.setOnClickListener {
-            startActivity(Intent(this, SignupActivity::class.java))
+            startActivity(Intent(this, SignupActivity1::class.java))
         }
         binding.constraintLayout2.setOnClickListener {
-            startActivity(Intent(this, SignupActivity::class.java))
+            startActivity(Intent(this, SignupActivity1::class.java))
         }
         binding.imageView2.setOnClickListener {
-            startActivity(Intent(this, SignupActivity::class.java))
+            startActivity(Intent(this, SignupActivity1::class.java))
         }
     }
 

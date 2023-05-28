@@ -28,6 +28,7 @@ import com.capstone.posturku.model.UserModel
 import com.capstone.posturku.ui.custom.EmailEditTextCustom
 import com.capstone.posturku.ui.custom.PassEditTextCustom
 import com.capstone.posturku.ui.main.MainActivity
+import com.capstone.posturku.ui.main.MainActivity1
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -221,7 +222,7 @@ class LoginActivity1 : AppCompatActivity() {
             setTitle("Yeah!")
             setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")
             setPositiveButton("Lanjut") { _, _ ->
-                val intent = Intent(context, MainActivity::class.java)
+                val intent = Intent(context, MainActivity1::class.java)
                 intent.flags =
                     Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
