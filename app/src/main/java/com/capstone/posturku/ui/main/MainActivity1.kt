@@ -86,9 +86,9 @@ class MainActivity1 : AppCompatActivity() {
     }
 
     private fun setupAction() {
-//        binding.logoutButton.setOnClickListener {
-//            mainViewModel.logout()
-//        }
+        binding.footerLogout.setOnClickListener {
+            mainViewModel.logout()
+        }
 //        binding.storyButton.setOnClickListener{
 //            val intent = Intent(this@MainActivity, ListCeritaActivity::class.java)
 //            startActivity(intent)

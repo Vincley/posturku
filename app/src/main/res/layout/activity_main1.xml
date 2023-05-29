@@ -256,10 +256,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Tips"
+                    android:text="Tip"
                     android:textAlignment="center"
                     android:textColor="#2e3d6d"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -292,10 +292,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Histories"
+                    android:text="History"
                     android:textAlignment="center"
                     android:textColor="#2e3d6d"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -328,10 +328,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Feedbacks"
+                    android:text="Feedback"
                     android:textAlignment="center"
                     android:textColor="#2e3d6d"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -365,10 +365,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Settings"
+                    android:text="Setting"
                     android:textAlignment="center"
                     android:textColor="#2e3d6d"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
@@ -457,8 +457,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/bottom_btn1" />
+                        android:layout_weight="1" />
 
                     <TextView
                         android:id="@+id/bottomtextView152"
@@ -492,10 +491,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/footer_logout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:clickable="true">
 
                     <ImageView
                         android:id="@+id/bottomimageView64"
