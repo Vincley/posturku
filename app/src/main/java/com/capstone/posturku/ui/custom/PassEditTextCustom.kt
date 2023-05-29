@@ -31,10 +31,14 @@ class PassEditTextCustom : AppCompatEditText {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (p0 != null && p0.length < 8) {
+                if (p0 != null && p0.length==0) {
+                    afterTextChangedCallback?.onEmpty()
+                }
+                else if(p0 != null && p0.length < 8){
                     val error = context.getString(R.string.passError)
                     afterTextChangedCallback?.onFailure(error)
-                } else {
+                }
+                else {
                     afterTextChangedCallback?.onSuccess()
                 }
             }
@@ -52,5 +56,7 @@ class PassEditTextCustom : AppCompatEditText {
     interface AfterTextChangedCallback {
         fun onSuccess()
         fun onFailure(errorMessage: String)
+        fun onEmpty()
+
     }
 }

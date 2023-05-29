@@ -50,7 +50,10 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutPersonName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginBottom="24dp"
+            >
 
             <com.capstone.posturku.ui.custom.EmailEditTextCustom
                 android:id="@+id/emailEditText1"
@@ -60,7 +63,6 @@
                 android:background="@drawable/edittext_background"
                 android:drawableStart="@drawable/ic_baseline_email_24"
                 android:drawablePadding="8dp"
-                android:layout_marginBottom="24dp"
 
                 android:ems="10"
                 android:hint="example@gmail.com"
@@ -87,7 +89,7 @@
             android:layout_height="wrap_content"
             app:passwordToggleEnabled="true">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.capstone.posturku.ui.custom.PassEditTextCustom
                 android:id="@+id/editTextTextPersonName2"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

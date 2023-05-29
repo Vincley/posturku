@@ -83,19 +83,24 @@ class LoginActivity1 : AppCompatActivity() {
         }
         supportActionBar?.hide()
         binding.progressBarLogin.visibility = View.GONE
-//
-//        binding.passwordEditText.setAfterTextChangedCallback(object : PassEditTextCustom.AfterTextChangedCallback {
-//            override fun onSuccess() {
-//                binding.passwordEditTextLayout.error = null
-//                isPasssValid = true
-//            }
-//
-//            override fun onFailure(errorMessage: String) {
-//                binding.passwordEditTextLayout.error = errorMessage
-//                isPasssValid = false
-//            }
-//        })
-//
+
+        binding.editTextTextPersonName2.setAfterTextChangedCallback(object : PassEditTextCustom.AfterTextChangedCallback {
+            override fun onSuccess() {
+                binding.textInputLayoutPassword.error = null
+                isPasssValid = true
+            }
+
+            override fun onFailure(errorMessage: String) {
+                binding.textInputLayoutPassword.error = errorMessage
+                isPasssValid = false
+            }
+
+            override fun onEmpty() {
+                binding.textInputLayoutPassword.error = null
+                isEmailValid = false
+            }
+        })
+
         binding.emailEditText1.setAfterTextChangedCallback(object : EmailEditTextCustom.AfterTextChangedCallback {
             override fun onSuccess() {
                // binding.emailEditTextLayout.error = null
@@ -103,7 +108,12 @@ class LoginActivity1 : AppCompatActivity() {
             }
 
             override fun onFailure(errorMessage: String) {
-               //binding.textInputLayoutPersonName.error = errorMessage
+                binding.textInputLayoutPersonName.error = errorMessage
+                isEmailValid = false
+            }
+
+            override fun OnEmpty() {
+                binding.textInputLayoutPersonName.error = null
                 isEmailValid = false
             }
         })
@@ -152,12 +162,12 @@ class LoginActivity1 : AppCompatActivity() {
                    // binding.passwordEditTextLayout.error = "Masukkan password"
                     binding.progressBarLogin.visibility = View.GONE
                 }
-//                !isEmailValid -> {
-//                    binding.progressBarLogin.visibility = View.GONE
-//                }
-//                !isPasssValid -> {
-//                    binding.progressBarLogin.visibility = View.GONE
-//                }
+                !isEmailValid -> {
+                    binding.progressBarLogin.visibility = View.GONE
+                }
+                !isPasssValid -> {
+                    binding.progressBarLogin.visibility = View.GONE
+                }
 
                 else -> {
                     val request = LoginRequest(email, password)

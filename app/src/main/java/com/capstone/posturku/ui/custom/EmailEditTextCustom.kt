@@ -34,11 +34,15 @@ class EmailEditTextCustom : AppCompatEditText {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 val email = p0.toString().trim()
 
-                if (email.isEmpty() || !isEmailValid(email)) {
+                if (email.isEmpty()) {
+                    afterTextChangedCallback?.OnEmpty()
+                }
+                else if (!isEmailValid(email)){
                     val error = context.getString(R.string.emailerror)
                     afterTextChangedCallback?.onFailure(error)
+
                 }
-                else{
+                else {
                     afterTextChangedCallback?.onSuccess()
                 }
             }
@@ -62,5 +66,6 @@ class EmailEditTextCustom : AppCompatEditText {
     interface AfterTextChangedCallback {
         fun onSuccess()
         fun onFailure(errorMessage: String)
+        fun OnEmpty()
     }
 }
