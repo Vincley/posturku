@@ -81,6 +81,9 @@ class SignupActivity : AppCompatActivity() {
                 binding.emailEditTextLayout.error = errorMessage
                 isEmailValid = false
             }
+            override fun OnEmpty() {
+                TODO("Not yet implemented")
+            }
         })
 
 
@@ -93,6 +96,10 @@ class SignupActivity : AppCompatActivity() {
             override fun onFailure(errorMessage: String) {
                 binding.passwordEditTextLayout.error = errorMessage
                 isPasssValid = false
+            }
+
+            override fun onEmpty() {
+                TODO("Not yet implemented")
             }
         })
 

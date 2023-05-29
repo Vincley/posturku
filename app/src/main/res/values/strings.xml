@@ -28,6 +28,7 @@
     <string name="empty_text">NO DATA</string>
     <string name="emailerror">Email not valid</string>
     <string name="passError">Minimum of 8 characters required</string>
+    <string name="password_not_match">Password not match</string>
 
     <!-- For NewCeritaActivity -->
     <string name="permission_denied">Failed to obtain permission to access camera.</string>

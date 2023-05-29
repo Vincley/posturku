@@ -19,9 +19,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.R
 import com.capstone.posturku.data.repository.AuthRepository
 import com.capstone.posturku.ViewModelFactory
-import com.capstone.posturku.databinding.ActivityLoginBinding
 import com.capstone.posturku.model.UserModel
 import com.capstone.posturku.data.UserPreference
+import com.capstone.posturku.databinding.ActivityLoginBinding
 import com.capstone.posturku.model.LoginRequest
 import com.capstone.posturku.model.LoginResult
 import com.capstone.posturku.ui.custom.EmailEditTextCustom
@@ -80,29 +80,37 @@ class LoginActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
-        binding.progressBarLogin.visibility = View.GONE
+        //binding.progressBarLogin.visibility = View.GONE
 
         binding.passwordEditText.setAfterTextChangedCallback(object : PassEditTextCustom.AfterTextChangedCallback {
             override fun onSuccess() {
-                binding.passwordEditTextLayout.error = null
+//                binding.passwordEditTextLayout.error = null
                 isPasssValid = true
             }
 
             override fun onFailure(errorMessage: String) {
-                binding.passwordEditTextLayout.error = errorMessage
+//                binding.passwordEditTextLayout.error = errorMessage
                 isPasssValid = false
+            }
+
+            override fun onEmpty() {
+                TODO("Not yet implemented")
             }
         })
 
         binding.emailEditText.setAfterTextChangedCallback(object : EmailEditTextCustom.AfterTextChangedCallback {
             override fun onSuccess() {
-                binding.emailEditTextLayout.error = null
+//                binding.emailEditTextLayout.error = null
                 isEmailValid = true
             }
 
             override fun onFailure(errorMessage: String) {
                 binding.emailEditTextLayout.error = errorMessage
                 isEmailValid = false
+            }
+
+            override fun OnEmpty() {
+                TODO("Not yet implemented")
             }
         })
 

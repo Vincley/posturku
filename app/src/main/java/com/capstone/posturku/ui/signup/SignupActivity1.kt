@@ -1,7 +1,5 @@
 package com.capstone.posturku.ui.signup
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -19,12 +17,11 @@ import com.capstone.posturku.R
 import com.capstone.posturku.ViewModelFactory
 import com.capstone.posturku.data.UserPreference
 import com.capstone.posturku.data.repository.AuthRepository
-import com.capstone.posturku.databinding.ActivitySignUpBinding
 import com.capstone.posturku.databinding.ActivitySignup1Binding
-import com.capstone.posturku.model.RegisterRequest
 import com.capstone.posturku.model.UserModel
 import com.capstone.posturku.ui.custom.EmailEditTextCustom
 import com.capstone.posturku.ui.custom.PassEditTextCustom
+import com.capstone.posturku.ui.custom.RePassEditTextCustom
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -42,6 +39,7 @@ class SignupActivity1 : AppCompatActivity() {
 
     private var isEmailValid = false
     private var isPasssValid = false
+    private var isRePassValid = false
 
 
 
@@ -53,7 +51,6 @@ class SignupActivity1 : AppCompatActivity() {
         setupView()
         setupViewModel()
         setupAction()
-        playAnimation()
 
         // Initialising auth object
         auth = Firebase.auth
@@ -72,33 +69,62 @@ class SignupActivity1 : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
-//        binding.progressBarRegister.visibility = View.GONE
-//
-//        binding.emailEditText.setAfterTextChangedCallback(object : EmailEditTextCustom.AfterTextChangedCallback {
-//            override fun onSuccess() {
-//                binding.emailEditTextLayout.error = null
-//                isEmailValid = true
-//            }
-//
-//            override fun onFailure(errorMessage: String) {
-//                binding.emailEditTextLayout.error = errorMessage
-//                isEmailValid = false
-//            }
-//        })
-//
-//
-//        binding.passwordEditText.setAfterTextChangedCallback(object : PassEditTextCustom.AfterTextChangedCallback {
-//            override fun onSuccess() {
-//                binding.passwordEditTextLayout.error = null
-//                isPasssValid = true
-//            }
-//
-//            override fun onFailure(errorMessage: String) {
-//                binding.passwordEditTextLayout.error = errorMessage
-//                isPasssValid = false
-//            }
-//        })
+        binding.progressBarRegister.visibility = View.GONE
 
+        binding.emailEditText1.setAfterTextChangedCallback(object : EmailEditTextCustom.AfterTextChangedCallback {
+            override fun onSuccess() {
+                binding.textInputLayoutPersonName.error = null
+                isEmailValid = true
+            }
+
+            override fun onFailure(errorMessage: String) {
+                binding.textInputLayoutPersonName.error = errorMessage
+                isEmailValid = false
+            }
+
+            override fun OnEmpty() {
+                binding.textInputLayoutPersonName.error = null
+                isEmailValid = false
+            }
+        })
+
+        val Password = binding.editTextTextPersonName2;
+        val rePassword = binding.editTextRePassword;
+
+        Password.setAfterTextChangedCallback(object : PassEditTextCustom.AfterTextChangedCallback {
+            override fun onSuccess() {
+                binding.textInputLayoutPassword.error = null
+                isPasssValid = true
+                rePassword.setOriginalPassword(Password.text.toString())
+            }
+
+            override fun onFailure(errorMessage: String) {
+                binding.textInputLayoutPassword.error = errorMessage
+                isPasssValid = false
+            }
+
+            override fun onEmpty() {
+                binding.textInputLayoutPassword.error = null
+                isEmailValid = false
+            }
+        })
+
+        rePassword.setAfterTextChangedCallback(object : RePassEditTextCustom.AfterTextChangedCallback {
+            override fun onSuccess() {
+                binding.textInputLayoutRePassword.error = null
+                isRePassValid = true
+            }
+
+            override fun onFailure(errorMessage: String) {
+                binding.textInputLayoutRePassword.error = errorMessage
+                isRePassValid = false
+            }
+
+            override fun onEmpty() {
+                binding.textInputLayoutRePassword.error = null
+                isRePassValid = false
+            }
+        })
     }
 
     private fun setupViewModel() {
@@ -112,7 +138,7 @@ class SignupActivity1 : AppCompatActivity() {
 
     private fun setupAction() {
         binding.button3.setOnClickListener {
-//            binding.progressBarRegister.visibility = View.VISIBLE
+            binding.progressBarRegister.visibility = View.VISIBLE
 
             val name = binding.editTextTextPersonName3.text.toString()
             val email = binding.emailEditText1.text.toString()
@@ -120,44 +146,25 @@ class SignupActivity1 : AppCompatActivity() {
 
             when {
                 name.isEmpty() -> {
-//                    binding.nameEditTextLayout.error = getString(R.string.enter_name)
-//                    binding.progressBarRegister.visibility = View.GONE
+                    binding.textView9.error = getString(R.string.enter_name)
+                   binding.progressBarRegister.visibility = View.GONE
                 }
                 email.isEmpty() -> {
-//                    binding.emailEditTextLayout.error = getString(R.string.enter_email)
-//                    binding.progressBarRegister.visibility = View.GONE
+                    binding.textInputLayoutPersonName.error = getString(R.string.enter_email)
+                    binding.progressBarRegister.visibility = View.GONE
                 }
-//                !isEmailValid ->{
-//                    binding.progressBarRegister.visibility = View.GONE
-//                }
-//                password.isEmpty() -> {
-//                    binding.passwordEditTextLayout.error = getString(R.string.enter_password)
-//                    binding.progressBarRegister.visibility = View.GONE
-//                }
-//                !isEmailValid -> {
-//                    binding.progressBarRegister.visibility = View.GONE
-//                }
-//                !isPasssValid -> {
-//                    binding.progressBarRegister.visibility = View.GONE
-//                }
-                else -> {
-                    val request = RegisterRequest(name, email, password)
-//                    authRepository.Register(request, object : AuthRepository.DefaultCallback {
-//                        override fun onSuccess() {
-//                            signupViewModel.saveUser(UserModel(name, email, password, false, ""))
-//                            binding.progressBarRegister.visibility = View.GONE
-//                            callAlert()
-//                        }
-//                        override fun onFailure(errorMessage: String) {
-//                            Toast.makeText(this@SignupActivity, errorMessage, Toast.LENGTH_SHORT).show()
-//                            binding.progressBarRegister.visibility = View.GONE
-//
-//                        }
-//                    })
+                password.isEmpty() -> {
+                    binding.textInputLayoutRePassword.error = getString(R.string.enter_password)
+                    binding.progressBarRegister.visibility = View.GONE
+                }
+                !isEmailValid || !isPasssValid || !isRePassValid ->{
+                    binding.progressBarRegister.visibility = View.GONE
+                }
 
+                else -> {
                     // Register with Firebase
                     auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) {
-//                        binding.progressBarRegister.visibility = View.GONE
+                        binding.progressBarRegister.visibility = View.GONE
 
                         if (it.isSuccessful) {
                             signupViewModel.saveUser(UserModel(name, email, password, false, ""))
@@ -182,37 +189,5 @@ class SignupActivity1 : AppCompatActivity() {
             create()
             show()
         }
-    }
-
-    private fun playAnimation() {
-//        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
-//            duration = 6000
-//            repeatCount = ObjectAnimator.INFINITE
-//            repeatMode = ObjectAnimator.REVERSE
-//        }.start()
-//
-//        val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(500)
-//        val nameTextView = ObjectAnimator.ofFloat(binding.nameTextView, View.ALPHA, 1f).setDuration(500)
-//        val nameEditTextLayout = ObjectAnimator.ofFloat(binding.nameEditTextLayout, View.ALPHA, 1f).setDuration(500)
-//        val emailTextView = ObjectAnimator.ofFloat(binding.emailTextView, View.ALPHA, 1f).setDuration(500)
-//        val emailEditTextLayout = ObjectAnimator.ofFloat(binding.emailEditTextLayout, View.ALPHA, 1f).setDuration(500)
-//        val passwordTextView = ObjectAnimator.ofFloat(binding.passwordTextView, View.ALPHA, 1f).setDuration(500)
-//        val passwordEditTextLayout = ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 1f).setDuration(500)
-//        val signup = ObjectAnimator.ofFloat(binding.signupButton, View.ALPHA, 1f).setDuration(500)
-//
-//
-//        AnimatorSet().apply {
-//            playSequentially(
-//                title,
-//                nameTextView,
-//                nameEditTextLayout,
-//                emailTextView,
-//                emailEditTextLayout,
-//                passwordTextView,
-//                passwordEditTextLayout,
-//                signup
-//            )
-//            startDelay = 500
-//        }.start()
     }
 }
