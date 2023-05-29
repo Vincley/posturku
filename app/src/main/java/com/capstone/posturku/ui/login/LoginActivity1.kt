@@ -1,7 +1,5 @@
 package com.capstone.posturku.ui.login
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -21,13 +19,10 @@ import com.capstone.posturku.ViewModelFactory
 import com.capstone.posturku.data.UserPreference
 import com.capstone.posturku.data.repository.AuthRepository
 import com.capstone.posturku.databinding.ActivityLogin1Binding
-import com.capstone.posturku.databinding.ActivityLoginBinding
-import com.capstone.posturku.model.LoginRequest
 import com.capstone.posturku.model.LoginResult
 import com.capstone.posturku.model.UserModel
 import com.capstone.posturku.ui.custom.EmailEditTextCustom
 import com.capstone.posturku.ui.custom.PassEditTextCustom
-import com.capstone.posturku.ui.main.MainActivity
 import com.capstone.posturku.ui.main.MainActivity1
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -66,8 +61,6 @@ class LoginActivity1 : AppCompatActivity() {
         setupView()
         setupViewModel()
         setupAction()
-        playAnimation()
-
         setupLoginByGoogle()
     }
 
@@ -170,18 +163,6 @@ class LoginActivity1 : AppCompatActivity() {
                 }
 
                 else -> {
-                    val request = LoginRequest(email, password)
-//                    authRepository.login(request, object : AuthRepository.LoginCallback {
-//                        override fun onSuccess(result: LoginResult) {
-//                            loginViewModel.login(result)
-//                            binding.progressBarLogin.visibility = View.GONE
-//                            callAlert()
-//                        }
-//                        override fun onFailure(errorMessage: String) {
-//                            Toast.makeText(this@LoginActivity, errorMessage, Toast.LENGTH_SHORT).show()
-//                        }
-//                    })
-
                     // Login with Firebase
                     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) {
                         binding.progressBarLogin.visibility = View.GONE
@@ -210,7 +191,6 @@ class LoginActivity1 : AppCompatActivity() {
         if(requestCode==Req_Code){
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleResult(task)
-//            firebaseAuthWithGoogle(account!!)
         }
     }
 
@@ -243,25 +223,4 @@ class LoginActivity1 : AppCompatActivity() {
         }
     }
 
-    private fun playAnimation() {
-//        ObjectAnimator.ofFloat(binding.imageView, View.TRANSLATION_X, -30f, 30f).apply {
-//            duration = 6000
-//            repeatCount = ObjectAnimator.INFINITE
-//            repeatMode = ObjectAnimator.REVERSE
-//        }.start()
-//
-//        val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 1f).setDuration(500)
-//        val message = ObjectAnimator.ofFloat(binding.messageTextView, View.ALPHA, 1f).setDuration(500)
-//        val emailTextView = ObjectAnimator.ofFloat(binding.emailTextView, View.ALPHA, 1f).setDuration(500)
-//        val emailEditTextLayout = ObjectAnimator.ofFloat(binding.emailEditTextLayout, View.ALPHA, 1f).setDuration(500)
-//        val passwordTextView = ObjectAnimator.ofFloat(binding.passwordTextView, View.ALPHA, 1f).setDuration(500)
-//        val passwordEditTextLayout = ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 1f).setDuration(500)
-//        val login = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 1f).setDuration(500)
-//        val login2 = ObjectAnimator.ofFloat(binding.loginButton2, View.ALPHA, 1f).setDuration(500)
-//
-//        AnimatorSet().apply {
-//            playSequentially(title, message, emailTextView, emailEditTextLayout, passwordTextView, passwordEditTextLayout, login, login2)
-//            startDelay = 500
-//        }.start()
-    }
 }
