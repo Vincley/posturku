@@ -248,7 +248,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_1" />
+                        app:srcCompat="@drawable/ic_6" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
@@ -256,7 +256,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Inbox"
+                    android:text="Tips"
                     android:textAlignment="center"
                     android:textColor="#2e3d6d"
                     android:textSize="14sp"
@@ -292,7 +292,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Maps"
+                    android:text="Histories"
                     android:textAlignment="center"
                     android:textColor="#2e3d6d"
                     android:textSize="14sp"
@@ -320,7 +320,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_3" />
+                        app:srcCompat="@drawable/feedback" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
@@ -328,7 +328,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Chats"
+                    android:text="Feedbacks"
                     android:textAlignment="center"
                     android:textColor="#2e3d6d"
                     android:textSize="14sp"
@@ -357,7 +357,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_4" />
+                        app:srcCompat="@drawable/ic_7" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
@@ -365,7 +365,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Reports"
+                    android:text="Settings"
                     android:textAlignment="center"
                     android:textColor="#2e3d6d"
                     android:textSize="14sp"
@@ -480,14 +480,14 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/bottom_btn4" />
+                        app:srcCompat="@drawable/about" />
 
                     <TextView
                         android:id="@+id/bottomtextView153"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Settings"
+                        android:text="About Us"
                         android:textAlignment="center" />
                 </LinearLayout>
 
@@ -510,7 +510,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Settings"
+                        android:text="Log Out"
                         android:textAlignment="center" />
                 </LinearLayout>
             </LinearLayout>
