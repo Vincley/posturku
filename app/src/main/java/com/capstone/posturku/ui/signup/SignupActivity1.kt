@@ -115,7 +115,7 @@ class SignupActivity1 : AppCompatActivity() {
 //            binding.progressBarRegister.visibility = View.VISIBLE
 
             val name = binding.editTextTextPersonName3.text.toString()
-            val email = binding.editTextTextPersonName.text.toString()
+            val email = binding.emailEditText1.text.toString()
             val password = binding.editTextTextPersonName2.text.toString()
 
             when {

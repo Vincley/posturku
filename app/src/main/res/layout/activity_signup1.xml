@@ -72,7 +72,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/emailEditText1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
@@ -110,13 +110,15 @@
             android:padding="8dp"
             android:textColor="#8e8e8e"
             android:textColorHint="#8e8e8e"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            />
+
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RePassword"
+            android:text="Re-Password"
             android:textColor="#000000"
             android:textSize="20dp"
             android:textStyle="bold" />

@@ -82,7 +82,7 @@ class LoginActivity1 : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
-//        binding.progressBarLogin.visibility = View.GONE
+        binding.progressBarLogin.visibility = View.GONE
 //
 //        binding.passwordEditText.setAfterTextChangedCallback(object : PassEditTextCustom.AfterTextChangedCallback {
 //            override fun onSuccess() {
@@ -96,17 +96,17 @@ class LoginActivity1 : AppCompatActivity() {
 //            }
 //        })
 //
-//        binding.emailEditText.setAfterTextChangedCallback(object : EmailEditTextCustom.AfterTextChangedCallback {
-//            override fun onSuccess() {
-//                binding.emailEditTextLayout.error = null
-//                isEmailValid = true
-//            }
-//
-//            override fun onFailure(errorMessage: String) {
-//                binding.emailEditTextLayout.error = errorMessage
-//                isEmailValid = false
-//            }
-//        })
+        binding.emailEditText1.setAfterTextChangedCallback(object : EmailEditTextCustom.AfterTextChangedCallback {
+            override fun onSuccess() {
+               // binding.emailEditTextLayout.error = null
+                isEmailValid = true
+            }
+
+            override fun onFailure(errorMessage: String) {
+               //binding.textInputLayoutPersonName.error = errorMessage
+                isEmailValid = false
+            }
+        })
 
     }
 
@@ -139,18 +139,18 @@ class LoginActivity1 : AppCompatActivity() {
 
     private fun setupAction() {
         binding.button3.setOnClickListener {
-            //binding.progressBarLogin.visibility = View.VISIBLE
-            val email = binding.editTextTextPersonName.text.toString()
+            binding.progressBarLogin.visibility = View.VISIBLE
+            val email = binding.emailEditText1.text.toString()
             val password = binding.editTextTextPersonName2.text.toString()
             //val passwordError = binding.passwordEditText.error;
             when {
                 email.isEmpty() -> {
                    // binding.emailEditTextLayout.error = "Masukkan email"
-                   // binding.progressBarLogin.visibility = View.GONE
+                    binding.progressBarLogin.visibility = View.GONE
                 }
                 password.isEmpty() -> {
                    // binding.passwordEditTextLayout.error = "Masukkan password"
-                   // binding.progressBarLogin.visibility = View.GONE
+                    binding.progressBarLogin.visibility = View.GONE
                 }
 //                !isEmailValid -> {
 //                    binding.progressBarLogin.visibility = View.GONE
@@ -174,7 +174,7 @@ class LoginActivity1 : AppCompatActivity() {
 
                     // Login with Firebase
                     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) {
-                        //binding.progressBarLogin.visibility = View.GONE
+                        binding.progressBarLogin.visibility = View.GONE
                         if (it.isSuccessful) {
                             val result = LoginResult(email, password, "")
                             loginViewModel.login(result)
