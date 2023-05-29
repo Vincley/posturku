@@ -107,6 +107,17 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/button_background"
+            android:text="Login"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            style="@android:style/Widget.Button"
+            android:layout_marginTop="40dp"
+            android:textColor="#ffffff"/>
 
         <TextView
             android:id="@+id/textView6"
@@ -166,17 +177,6 @@
 
 
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:background="@drawable/button_background"
-            android:text="Login"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            style="@android:style/Widget.Button"
-            android:layout_marginTop="60dp"
-            android:textColor="#ffffff"/>
     </LinearLayout>
 
     <ProgressBar

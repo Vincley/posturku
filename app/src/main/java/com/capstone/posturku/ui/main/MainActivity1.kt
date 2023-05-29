@@ -52,6 +52,7 @@ class MainActivity1 : AppCompatActivity() {
         setupView()
         setupViewModel()
         setupAction()
+        setupMenu()
         SetupCamera()
         playAnimation()
     }
@@ -86,21 +87,42 @@ class MainActivity1 : AppCompatActivity() {
     }
 
     private fun setupAction() {
+
+        binding.footerHome.setOnClickListener{
+//            val intent = Intent(this@MainActivity, ListCeritaActivity::class.java)
+//            startActivity(intent)
+        }
+
+        binding.footerProfile.setOnClickListener {
+            Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()
+           // startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+        }
+        binding.footerAboutUs.setOnClickListener{
+            Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()
+//            val intent = Intent(this@MainActivity, MapActivity::class.java)
+//            startActivity(intent)
+        }
         binding.footerLogout.setOnClickListener {
             mainViewModel.logout()
         }
-//        binding.storyButton.setOnClickListener{
-//            val intent = Intent(this@MainActivity, ListCeritaActivity::class.java)
-//            startActivity(intent)
-//        }
-//        binding.mapButton.setOnClickListener{
-//            val intent = Intent(this@MainActivity, MapActivity::class.java)
-//            startActivity(intent)
-//        }
 
-//        binding.settingImageView.setOnClickListener {
-//            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
-//        }
+    }
+
+    private fun setupMenu() {
+
+        binding.mainTip.setOnClickListener {
+            Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()
+        }
+        binding.mainHistory.setOnClickListener{
+            Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()
+        }
+        binding.mainFeedback.setOnClickListener {
+            Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()
+        }
+        binding.mainSetting.setOnClickListener{
+            Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun SetupCamera(){

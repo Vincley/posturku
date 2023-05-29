@@ -96,7 +96,7 @@ class LoginActivity1 : AppCompatActivity() {
 
         binding.emailEditText1.setAfterTextChangedCallback(object : EmailEditTextCustom.AfterTextChangedCallback {
             override fun onSuccess() {
-               // binding.emailEditTextLayout.error = null
+                binding.textInputLayoutPersonName.error = null
                 isEmailValid = true
             }
 
@@ -145,20 +145,16 @@ class LoginActivity1 : AppCompatActivity() {
             binding.progressBarLogin.visibility = View.VISIBLE
             val email = binding.emailEditText1.text.toString()
             val password = binding.editTextTextPersonName2.text.toString()
-            //val passwordError = binding.passwordEditText.error;
             when {
                 email.isEmpty() -> {
-                   // binding.emailEditTextLayout.error = "Masukkan email"
+                   binding.textInputLayoutPersonName.error = "Masukkan email"
                     binding.progressBarLogin.visibility = View.GONE
                 }
                 password.isEmpty() -> {
-                   // binding.passwordEditTextLayout.error = "Masukkan password"
+                    binding.textInputLayoutPersonName.error = "Masukkan password"
                     binding.progressBarLogin.visibility = View.GONE
                 }
-                !isEmailValid -> {
-                    binding.progressBarLogin.visibility = View.GONE
-                }
-                !isPasssValid -> {
+                !isEmailValid || !isPasssValid -> {
                     binding.progressBarLogin.visibility = View.GONE
                 }
 

@@ -227,11 +227,13 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/main_tip"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:clickable="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -264,11 +266,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/main_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:clickable="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -300,11 +304,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/main_feedback"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:clickable="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -336,11 +342,13 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/main_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:clickable="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -400,6 +408,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/footer_home"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -423,6 +432,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/footer_profile"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -468,6 +478,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/footer_aboutUs"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
