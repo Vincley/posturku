@@ -93,7 +93,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Forget Your Password? Recovery it"
-            android:textColor="#4d4d4d" />
+            android:textColor="#4d4d4d"
+            android:alpha="0"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -126,45 +127,22 @@
                 android:background="#707070" />
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button2"
+            style="@android:style/Widget.Button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button2"
-                style="@android:style/Widget.Button"
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:background="@drawable/social_background"
-                android:drawableStart="@drawable/google"
-                android:drawablePadding="16dp"
-                android:layout_marginEnd="8dp"
-                android:padding="16dp"
-                android:text="Google"
-                android:textColor="#6D6DBF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button"
-                style="@android:style/Widget.Button"
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/social_background"
-                android:drawableStart="@drawable/facebook"
-                android:drawablePadding="16dp"
-                android:padding="16dp"
-                android:text="Facebook"
-                android:textColor="#6D6DBF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+            android:layout_height="55dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="55dp"
+            android:layout_marginEnd="55dp"
+            android:background="@drawable/social_background"
+            android:drawableStart="@drawable/google"
+            android:paddingLeft="8dp"
+            android:paddingRight="30dp"
+            android:text="Google"
+            android:textColor="#6D6DBF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button3"
