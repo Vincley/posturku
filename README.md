@@ -6,3 +6,5 @@
   <li>With this solution, programmers can reduce the risk of health and posture problems and increase productivity.</li>
 </ul>
 </p>
+
+![Welcome](https://github.com/Vincley/posturku/blob/main/ss/1.%20Welcome.jpg?raw=true)
