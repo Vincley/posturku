@@ -27,8 +27,8 @@ import com.capstone.posturku.R
 import com.capstone.posturku.ViewModelFactory
 import com.capstone.posturku.data.UserPreference
 import com.capstone.posturku.databinding.ActivityMain1Binding
-import com.capstone.posturku.databinding.ActivityMainBinding
 import com.capstone.posturku.ui.camera.pose.PoseActivity
+import com.capstone.posturku.ui.news.NewsActivity
 import com.capstone.posturku.ui.welcome.WelcomeActivity1
 import com.capstone.posturku.utils.rotateBitmap
 import java.io.File
@@ -111,8 +111,8 @@ class MainActivity1 : AppCompatActivity() {
     private fun setupMenu() {
 
         binding.mainTip.setOnClickListener {
-            Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()
-        }
+            val intent = Intent(this, NewsActivity::class.java)
+            startActivity(intent)        }
         binding.mainHistory.setOnClickListener{
             Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()
         }
