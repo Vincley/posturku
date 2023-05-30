@@ -146,7 +146,7 @@ class SignupActivity1 : AppCompatActivity() {
 
             when {
                 name.isEmpty() -> {
-                    binding.textView9.error = getString(R.string.enter_name)
+                    binding.tvSignUpName.error = getString(R.string.enter_name)
                    binding.progressBarRegister.visibility = View.GONE
                 }
                 email.isEmpty() -> {

@@ -9,10 +9,8 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import com.capstone.posturku.R
 import com.capstone.posturku.databinding.ActivityWelcome1Binding
 import com.capstone.posturku.ui.login.LoginActivity1
-import com.capstone.posturku.ui.signup.SignupActivity
 import com.capstone.posturku.ui.signup.SignupActivity1
 
 

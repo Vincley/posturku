@@ -11,7 +11,7 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import com.capstone.posturku.databinding.ActivityWelcomeBinding
 import com.capstone.posturku.ui.login.LoginActivity
-import com.capstone.posturku.ui.signup.SignupActivity
+import com.capstone.posturku.ui.signup.SignupActivity1
 
 
 class WelcomeActivity : AppCompatActivity() {
@@ -47,7 +47,7 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
         binding.signupButton.setOnClickListener {
-            startActivity(Intent(this, SignupActivity::class.java))
+            startActivity(Intent(this, SignupActivity1::class.java))
         }
     }
 
