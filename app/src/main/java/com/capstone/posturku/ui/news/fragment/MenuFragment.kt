@@ -1,15 +1,18 @@
 package com.capstone.posturku.ui.news.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.posturku.R
 import com.capstone.posturku.adapter.ListNewAdapter
 import com.capstone.posturku.model.news.Hero
+import com.capstone.posturku.ui.news.NewsReadActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -71,7 +74,18 @@ class MenuFragment : Fragment() {
         val listHeroAdapter = ListNewAdapter(list)
         rvHeroes.adapter = listHeroAdapter
 
+        listHeroAdapter.setOnItemClickCallback(object : ListNewAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: Hero) {
+                showSelectedHero(data)
+            }
+        })
+    }
 
+    private fun showSelectedHero(hero: Hero) {
+        val intentToDetail = Intent(context, NewsReadActivity::class.java)
+        intentToDetail.putExtra("DATA", hero)
+        startActivity(intentToDetail)
+//        Toast.makeText(context, "Kamu memilih " + hero.name, Toast.LENGTH_SHORT).show()
     }
 
     companion object {
