@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.capstone.posturku.R
+import com.capstone.posturku.adapter.ListNewAdapter
+import com.capstone.posturku.model.news.Hero
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,6 +22,10 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class MenuFragment : Fragment() {
+    private lateinit var rvHeroes: RecyclerView
+    private val list = ArrayList<Hero>()
+
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -28,6 +36,8 @@ class MenuFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(
@@ -35,7 +45,31 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false)
+        val view = inflater.inflate(R.layout.fragment_menu, container, false)
+
+        rvHeroes = view.findViewById(R.id.rv_heroes)
+        rvHeroes.setHasFixedSize(true)
+        list.addAll(getListHeroes())
+        showRecyclerList()
+
+        return view
+    }
+
+    private fun getListHeroes(): ArrayList<Hero> {
+        val dataName = resources.getStringArray(R.array.data_name)
+        val dataDescription = resources.getStringArray(R.array.data_description)
+        val listHero = ArrayList<Hero>()
+        for (i in dataName.indices) {
+            val hero = Hero(dataName[i], dataDescription[i], 0)
+            listHero.add(hero)
+        }
+        return listHero
+    }
+
+    private fun showRecyclerList() {
+        rvHeroes.layoutManager = LinearLayoutManager(requireContext())
+        val listHeroAdapter = ListNewAdapter(list)
+        rvHeroes.adapter = listHeroAdapter
     }
 
     companion object {

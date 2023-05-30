@@ -21,7 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:menu="@menu/option_menu"
-            app:title="@string/app_name" />
+            app:title="News"
+            app:titleTextColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"            />
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.tabs.TabLayout
@@ -31,7 +34,8 @@
         android:background="#8B94FE"
         android:layout_marginTop="84dp"
         app:tabTextColor="@android:color/white"
-        android:clickable="true"/>
+        android:clickable="true"
+        app:tabIndicatorColor="#FBA868"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
@@ -40,5 +44,14 @@
         android:layout_marginTop="130dp"
         />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_baseline_email_24"
+        app:backgroundTint="#FF9800"
+        app:elevation="6dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
