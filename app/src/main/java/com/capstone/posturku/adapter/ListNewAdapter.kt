@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.posturku.R
 import com.capstone.posturku.model.news.Hero
@@ -21,6 +22,10 @@ class ListNewAdapter(private val listHero: ArrayList<Hero>) : RecyclerView.Adapt
         holder.imgPhoto.setImageResource(photo)
         holder.tvName.text = name
         holder.tvDescription.text = description
+
+        holder.itemView.setOnClickListener {
+            Toast.makeText(holder.itemView.context, "Kamu memilih " + listHero[holder.adapterPosition].name, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun getItemCount(): Int = listHero.size

@@ -67,9 +67,11 @@ class MenuFragment : Fragment() {
     }
 
     private fun showRecyclerList() {
-        rvHeroes.layoutManager = LinearLayoutManager(requireContext())
+        rvHeroes.layoutManager = LinearLayoutManager(context)
         val listHeroAdapter = ListNewAdapter(list)
         rvHeroes.adapter = listHeroAdapter
+
+
     }
 
     companion object {
