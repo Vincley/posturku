@@ -7,4 +7,8 @@
 </ul>
 </p>
 
-![Welcome](https://github.com/Vincley/posturku/blob/main/ss/1.%20Welcome.jpg?raw=true)
+<p align="center">
+  <img src="https://github.com/Vincley/posturku/blob/main/ss/Welcome.jpg?raw=true" width="256" title="Welcome">
+  <img src="https://github.com/Vincley/posturku/blob/main/ss/Register Empty.jpg?raw=true" width="256" alt="Register">
+  <img src="https://github.com/Vincley/posturku/blob/main/ss/Login Empty.jpg?raw=true" width="256" alt="Login">
+</p>
