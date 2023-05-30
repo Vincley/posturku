@@ -158,13 +158,9 @@ class LoginActivity : AppCompatActivity() {
                     binding.passwordEditTextLayout.error = "Masukkan password"
                     binding.progressBarLogin.visibility = View.GONE
                 }
-                !isEmailValid -> {
+                !isEmailValid || !isPasssValid -> {
                     binding.progressBarLogin.visibility = View.GONE
                 }
-                !isPasssValid -> {
-                    binding.progressBarLogin.visibility = View.GONE
-                }
-
                 else -> {
                     val request = LoginRequest(email, password)
 //                    authRepository.login(request, object : AuthRepository.LoginCallback {

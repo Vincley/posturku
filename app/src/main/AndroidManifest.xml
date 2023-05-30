@@ -22,13 +22,16 @@
             android:exported="false" />
         <activity
             android:name=".ui.welcome.WelcomeActivity1"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.signup.SignupActivity1"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.login.LoginActivity1"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.camera.pose.PoseActivity"
             android:exported="false" />
@@ -49,7 +52,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity1"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

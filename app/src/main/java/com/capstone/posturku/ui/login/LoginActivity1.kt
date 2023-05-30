@@ -90,7 +90,7 @@ class LoginActivity1 : AppCompatActivity() {
 
             override fun onEmpty() {
                 binding.textInputLayoutPassword.error = null
-                isEmailValid = false
+                isPasssValid = false
             }
         })
 

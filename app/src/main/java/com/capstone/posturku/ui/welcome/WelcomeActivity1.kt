@@ -47,21 +47,8 @@ class WelcomeActivity1 : AppCompatActivity() {
         binding.constraintLayout5.setOnClickListener {
             startActivity(Intent(this, LoginActivity1::class.java))
         }
-        binding.constraintLayout4.setOnClickListener {
-            startActivity(Intent(this, LoginActivity1::class.java))
-        }
-        binding.imageView3.setOnClickListener {
-            startActivity(Intent(this, LoginActivity1::class.java))
-        }
-
 
         binding.constraintLayout3.setOnClickListener {
-            startActivity(Intent(this, SignupActivity1::class.java))
-        }
-        binding.constraintLayout2.setOnClickListener {
-            startActivity(Intent(this, SignupActivity1::class.java))
-        }
-        binding.imageView2.setOnClickListener {
             startActivity(Intent(this, SignupActivity1::class.java))
         }
     }
