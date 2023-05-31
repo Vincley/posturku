@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.data.UserPreference
 import com.capstone.posturku.data.repository.AuthRepository
+import com.capstone.posturku.data.repository.NewsRepository
 import com.capstone.posturku.ui.login.LoginViewModel
 import com.capstone.posturku.ui.main.MainViewModel
+import com.capstone.posturku.ui.news.NewsViewModel
 import com.capstone.posturku.ui.signup.SignupViewModel
 
 class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
@@ -28,15 +30,15 @@ class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.New
 }
 
 
-//class ListViewModelFactory(private val repo : AuthRepository, private val token: String) : ViewModelProvider.NewInstanceFactory() {
-//
-//    @Suppress("UNCHECKED_CAST")
-//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//        return when {
-//            modelClass.isAssignableFrom(ListCeritaViewModelV2::class.java) -> {
-//                ListCeritaViewModelV2(repo, token) as T
-//            }
-//            else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
-//        }
-//    }
-//}
+class ViewModelRepoFactory(private val repo : NewsRepository) : ViewModelProvider.NewInstanceFactory() {
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return when {
+            modelClass.isAssignableFrom(NewsViewModel::class.java) -> {
+                NewsViewModel(repo) as T
+            }
+            else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
+        }
+    }
+}

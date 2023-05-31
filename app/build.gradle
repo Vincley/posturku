@@ -93,4 +93,7 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite-gpu:2.5.0'
     implementation 'org.tensorflow:tensorflow-lite-support:0.3.0'
     //endregion
+
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
 }

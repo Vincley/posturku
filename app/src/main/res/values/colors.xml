@@ -10,8 +10,10 @@
 
     <color name="navi">#2D3D4F</color>
 
-    <!-- For DashboardActivity -->
-    <color name="green">#26BEA4</color>
-    <color name="purple">#0A134C</color>
+    <!-- For NewsdActivity -->
+    <color name="black_alpha_70">#66000000</color>
+    <color name="white_alpha_70">#B3FFFFFF</color>
+    <color name="white_alpha_85">#DAFFFFFF</color>
+    <color name="purple">#FF6200EE</color>
 
 </resources>

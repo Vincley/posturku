@@ -171,6 +171,7 @@
             android:textSize="24dp"
             android:textStyle="bold" />
     </LinearLayout>
+
     <ProgressBar
         android:id="@+id/progress_bar_register"
         style="?android:attr/progressBarStyle"

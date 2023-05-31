@@ -1,116 +1,63 @@
 package com.capstone.posturku.data.repository
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import com.capstone.posturku.api.ApiConfigNews
-import com.capstone.posturku.api.ApiServiceNews
-import com.capstone.posturku.model.news.NewsDataFromJson
-import com.capstone.posturku.model.news.NewsModel
-import org.json.JSONException
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import android.content.Context
+import com.capstone.posturku.api.news.ApiConfigNews
+import com.capstone.posturku.api.news.ApiServiceNews
+import com.capstone.posturku.model.news.NewsResponse
+import com.capstone.posturku.model.news.Resource
+import com.capstone.posturku.utils.news.NetworkUtils
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class NewsRepository {
 
-    companion object {
-
-        //private var newsDatabase: NewsDatabase? = null
-
-//        private fun initializeDB(context: Context): NewsDatabase {
-//            return NewsDatabase.getDatabaseClient(context)
-//        }
-//
-//        fun insertNews(context: Context, news: NewsModel) {
-//
-//            newsDatabase = initializeDB(context)
-//            CoroutineScope(IO).launch {
-//                newsDatabase!!.newsDao().insertNews(news)
-//            }
-//        }
-//
-//        fun deleteNews(context: Context, news: NewsModel) {
-//
-//            newsDatabase = initializeDB(context)
-//            CoroutineScope(IO).launch {
-//                newsDatabase!!.newsDao().deleteNews(news)
-//            }
-//        }
-//
-//        fun getAllNews(context: Context): LiveData<List<NewsModel>> {
-//
-//            newsDatabase = initializeDB(context)
-//            return newsDatabase!!.newsDao().getNewsFromDatabase()
-//        }
-
-    }
-
-    // get news from API
-    fun getNewsApiCall(category: String?): MutableLiveData<List<NewsModel>> {
-
-        val newsList = MutableLiveData<List<NewsModel>>()
-
-        val call = ApiConfigNews.getInstance().create(ApiServiceNews::class.java)
-            .getNews("in", category, "5a3e054de1834138a2fbc4a75ee69053") //put your api key here
-
-        call.enqueue(object : Callback<NewsDataFromJson> {
-            override fun onResponse(
-                call: Call<NewsDataFromJson>,
-                response: Response<NewsDataFromJson>
-            ) {
-
+    fun getNews(context: Context, category: String, pageNo: Int): Flow<Resource<NewsResponse>> {
+        return flow {
+            if (NetworkUtils.getNetworkStatus(context)) {
+                val response = ApiConfigNews.getApiService().getTopHeadlines(category, pageNo)
                 if (response.isSuccessful) {
-
                     val body = response.body()
 
-                    if (body != null) {
-                        val tempNewsList = mutableListOf<NewsModel>()
-
+                    if (body?.articles != null) {
+                        if (pageNo == 1)
+                            //newsDAO.deleteArticlesFor(category)
                         body.articles.forEach {
-                            tempNewsList.add(
-                                NewsModel(
-                                    it.title,
-                                    it.urlToImage,
-                                    it.description,
-                                    it.url,
-                                    it.source.name,
-                                    it.publishedAt,
-                                    it.content
-                                )
-                            )
+                            it.category = category
+                            //newsDAO.addArticle(it)
                         }
-                        newsList.value = tempNewsList
+                        //saving total articles in response to datastore
+                        //DataStoreManager(context).saveTotalArticles(body.totalResults!!)
+                        emit(Resource.Success(body))
+                    } else {
+                        emit(Resource.Error("No response from server"))
                     }
-
                 } else {
-
-                    val jsonObj: JSONObject?
-
-                    try {
-                        jsonObj = response.errorBody()?.string()?.let { JSONObject(it) }
-                        if (jsonObj != null) {
-//                            MainActivity.apiRequestError = true
-//                            MainActivity.errorMessage = jsonObj.getString("message")
-                            val tempNewsList = mutableListOf<NewsModel>()
-                            newsList.value = tempNewsList
-                        }
-                    } catch (e: JSONException) {
-                        Log.d("JSONException", "" + e.message)
-                    }
-
+                    emit(Resource.Error("Server Error"))
                 }
+            } else {
+                emit(Resource.Error("No internet connection"))
+                //val articlesFlow = newsDAO.getAllArticlesUsingCategory(category)
+//                articlesFlow.collect {
+//                    if (it.isNullOrEmpty()) {
+//                        emit(Resource.Error("No internet connection"))
+//                    } else {
+//                        emit(Resource.Success(NewsResponse("ok", it.size, it)))
+//                    }
+//                }
             }
-
-            override fun onFailure(call: Call<NewsDataFromJson>, t: Throwable) {
-
-//                MainActivity.apiRequestError = true
-//                MainActivity.errorMessage = t.localizedMessage as String
-                Log.d("err_msg", "msg" + t.localizedMessage)
-            }
-        })
-
-        return newsList
+        }
     }
+    companion object{
+        private const val TAG = "NewsRepository"
 
+        @Volatile
+        private var INSTANCE: NewsRepository? = null
+
+        fun getInstance(): NewsRepository {
+            if (INSTANCE == null) {
+                INSTANCE = NewsRepository()
+            }
+            return INSTANCE as NewsRepository
+        }
+    }
 }
