@@ -10,7 +10,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.capstone.posturku.R
 import com.capstone.posturku.adapter.NewsPagerAdapter
 import com.capstone.posturku.databinding.ActivityNewsBinding
-import com.capstone.posturku.ui.news.fragment.MenuFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

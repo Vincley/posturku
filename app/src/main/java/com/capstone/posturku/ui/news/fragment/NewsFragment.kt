@@ -10,11 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.posturku.ViewModelRepoFactory
-import com.capstone.posturku.adapter.ListNewAdapter
 import com.capstone.posturku.adapter.NewsAdapter
 import com.capstone.posturku.data.repository.NewsRepository
 import com.capstone.posturku.databinding.FragmentNewsBinding
-import com.capstone.posturku.model.news.Hero
 import com.capstone.posturku.model.news.Resource
 import com.capstone.posturku.model.news.entities.Article
 import com.capstone.posturku.ui.news.NewsReadActivity
