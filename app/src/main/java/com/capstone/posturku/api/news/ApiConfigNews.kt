@@ -1,7 +1,6 @@
 package com.capstone.posturku.api.news
 
 import androidx.viewbinding.BuildConfig
-import com.capstone.posturku.api.ApiService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

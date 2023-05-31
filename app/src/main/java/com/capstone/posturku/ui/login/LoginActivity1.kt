@@ -17,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.R
 import com.capstone.posturku.ViewModelFactory
 import com.capstone.posturku.data.UserPreference
-import com.capstone.posturku.data.repository.AuthRepository
 import com.capstone.posturku.databinding.ActivityLogin1Binding
 import com.capstone.posturku.model.LoginResult
 import com.capstone.posturku.model.UserModel
@@ -38,7 +37,6 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 
 class LoginActivity1 : AppCompatActivity() {
     private lateinit var loginViewModel: LoginViewModel
-    private lateinit var authRepository: AuthRepository
     private lateinit var binding: ActivityLogin1Binding
     private lateinit var user: UserModel
 
@@ -116,7 +114,6 @@ class LoginActivity1 : AppCompatActivity() {
 
     private fun setupViewModel() {
         loginViewModel = ViewModelProvider(this, ViewModelFactory(UserPreference.getInstance(dataStore)))[LoginViewModel::class.java]
-        authRepository = AuthRepository.getInstance()
 
         loginViewModel.getUser().observe(this, { user ->
             this.user = user

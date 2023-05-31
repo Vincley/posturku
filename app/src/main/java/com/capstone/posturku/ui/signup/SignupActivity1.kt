@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.R
 import com.capstone.posturku.ViewModelFactory
 import com.capstone.posturku.data.UserPreference
-import com.capstone.posturku.data.repository.AuthRepository
 import com.capstone.posturku.databinding.ActivitySignup1Binding
 import com.capstone.posturku.model.UserModel
 import com.capstone.posturku.ui.custom.EmailEditTextCustom
@@ -31,7 +30,6 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class SignupActivity1 : AppCompatActivity() {
     private lateinit var binding: ActivitySignup1Binding
     private lateinit var signupViewModel: SignupViewModel
-    private lateinit var authRepository: AuthRepository
 
     // create Firebase authentication object
     private lateinit var auth: FirebaseAuth
@@ -128,8 +126,6 @@ class SignupActivity1 : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        authRepository = AuthRepository.getInstance()
-
         signupViewModel = ViewModelProvider(
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore))

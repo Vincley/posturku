@@ -3,7 +3,6 @@ package com.capstone.posturku
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.data.UserPreference
-import com.capstone.posturku.data.repository.AuthRepository
 import com.capstone.posturku.data.repository.NewsRepository
 import com.capstone.posturku.ui.login.LoginViewModel
 import com.capstone.posturku.ui.main.MainViewModel

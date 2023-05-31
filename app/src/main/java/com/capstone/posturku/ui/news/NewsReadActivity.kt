@@ -10,14 +10,11 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.widget.Toolbar
 import com.capstone.posturku.R
-import com.capstone.posturku.model.news.NewsModel
 import com.capstone.posturku.model.news.entities.Article
-import java.util.ArrayList
 
 class NewsReadActivity : AppCompatActivity() {
     private lateinit var newsWebView: WebView
     private lateinit var viewModel: NewsViewModel
-    private lateinit var newsData: ArrayList<NewsModel>
 
 
     @SuppressLint("MissingInflatedId")
