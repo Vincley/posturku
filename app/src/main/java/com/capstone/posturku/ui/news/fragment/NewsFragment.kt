@@ -1,5 +1,6 @@
 package com.capstone.posturku.ui.news.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,10 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.posturku.ViewModelRepoFactory
+import com.capstone.posturku.adapter.ListNewAdapter
 import com.capstone.posturku.adapter.NewsAdapter
 import com.capstone.posturku.data.repository.NewsRepository
 import com.capstone.posturku.databinding.FragmentNewsBinding
+import com.capstone.posturku.model.news.Hero
 import com.capstone.posturku.model.news.Resource
+import com.capstone.posturku.model.news.entities.Article
+import com.capstone.posturku.ui.news.NewsReadActivity
 import com.capstone.posturku.ui.news.NewsViewModel
 
 class NewsFragment : Fragment() {
@@ -46,6 +51,12 @@ class NewsFragment : Fragment() {
                     binding?.rvNews?.setHasFixedSize(true)
                     binding?.rvNews?.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     binding?.rvNews?.adapter = newsAdapter
+
+                    newsAdapter.setOnItemClickCallback(object : NewsAdapter.OnItemClickCallback {
+                        override fun onItemClicked(data: Article) {
+                            showSelectedArticle(data)
+                        }
+                    })
                 }
                 is Resource.Error -> {
                     binding?.progressBarNews?.visibility = View.GONE
@@ -55,5 +66,11 @@ class NewsFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun showSelectedArticle(data: Article) {
+        val intentToDetail = Intent(context, NewsReadActivity::class.java)
+        intentToDetail.putExtra("DATA", data)
+        startActivity(intentToDetail)
     }
 }

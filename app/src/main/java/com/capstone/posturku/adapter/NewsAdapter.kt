@@ -17,6 +17,14 @@ import com.capstone.posturku.model.news.entities.Article
 
 class NewsAdapter(private val listArticles: List<Article>): RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
+
+
+    private lateinit var onItemClickCallback: NewsAdapter.OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: NewsAdapter.OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_news1, parent, false)
         return NewsViewHolder(view)
@@ -50,6 +58,9 @@ class NewsAdapter(private val listArticles: List<Article>): RecyclerView.Adapter
                 holder.name.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black_alpha_70))
             }
         }
+
+        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listArticles[holder.adapterPosition]) }
+
     }
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -60,5 +71,7 @@ class NewsAdapter(private val listArticles: List<Article>): RecyclerView.Adapter
         val root: LinearLayout = itemView.findViewById(R.id.llNewsArticleRoot)
     }
 
-
+    interface OnItemClickCallback {
+        fun onItemClicked(data: Article)
+    }
 }
