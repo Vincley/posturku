@@ -18,9 +18,10 @@ Response:
   "message": "Articles fetched successfully",
   "listArticles": [
     {
+      "id": 1,
       "source": {
-        "id": "engadget",
-        "name": "Engadget"
+        "id": 1,
+        "name": "Kompas.com"
       },
       "author": "Jon Fingas",
       "title": "Apple WWDC 2023: What to expect, from iOS 17 to new MacBooks",
@@ -31,9 +32,10 @@ Response:
       "content": "Apples Worldwide Developers Conference regularly sets the tone for the companys future, and that may be truer than ever for 2023. Many expect the company to introduce its first mixed reality headset … [+7109 chars]"
     },
     {
+      "id": 2,
       "source": {
-        "id": "engadget",
-        "name": "Engadget"
+        "id": 1,
+        "name": "Kompas.com"
       },
       "author": "Mat Smith",
       "title": "The Morning After: Industry leaders say AI presents 'risk of extinction' on par with nuclear war",
