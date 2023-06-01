@@ -1,4 +1,4 @@
-## History Topup
+## Get All Articles
 Request:
 - URL:
   - /articles 
