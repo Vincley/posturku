@@ -18,11 +18,17 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import com.capstone.posturku.R
 import com.capstone.posturku.data.pose.Device
+import com.capstone.posturku.databinding.ActivityMain1Binding
+import com.capstone.posturku.databinding.ActivityPoseBinding
 import com.capstone.posturku.ml.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class PoseActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityPoseBinding
+
+
+
     /** A [SurfaceView] for camera preview.   */
     private lateinit var surfaceView: SurfaceView
 
@@ -114,7 +120,8 @@ class PoseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pose)
+        binding = ActivityPoseBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // keep screen on while app is running
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -136,6 +143,9 @@ class PoseActivity : AppCompatActivity() {
         if (!isCameraPermissionGranted()) {
             requestPermission()
         }
+
+        binding.switchCamera.setOnClickListener { cameraSource?.switchCamera() }
+
     }
 
     override fun onStart() {

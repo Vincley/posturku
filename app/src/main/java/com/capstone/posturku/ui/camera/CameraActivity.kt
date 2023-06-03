@@ -1,111 +1,61 @@
 package com.capstone.posturku.ui.camera
 
-import android.content.ContentValues.TAG
+import android.media.AudioAttributes
+import android.media.MediaPlayer
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Toast
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.content.ContextCompat
-import androidx.exifinterface.media.ExifInterface
 import com.capstone.posturku.R
 import com.capstone.posturku.databinding.ActivityCameraBinding
-import com.capstone.posturku.utils.createFile
-import java.io.File
+import java.io.IOException
 
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
-    private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-    private var imageCapture: ImageCapture? = null
+    private lateinit var cameraSource: CameraSource1
+
+    private var mMediaPlayer: MediaPlayer? = null
+    private var isReady: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        cameraSource = CameraSource1(this, binding, this, application)
 
-        binding.captureImage.setOnClickListener { takePhoto() }
+//        binding.captureImage.setOnClickListener { cameraSource.takePhoto() }
+//        binding.switchCamera.setOnClickListener { cameraSource.switchCamera() }
+
+        binding.captureImage.setOnClickListener {
+            if (!isReady) {
+                mMediaPlayer?.prepareAsync()
+            }
+            else {
+                if (mMediaPlayer?.isPlaying as Boolean)
+                {
+                    mMediaPlayer?.pause()
+                }
+                else
+                {
+                    mMediaPlayer?.start()}
+            }
+        }
         binding.switchCamera.setOnClickListener {
-            cameraSelector = if (cameraSelector.equals(CameraSelector.DEFAULT_BACK_CAMERA)) CameraSelector.DEFAULT_FRONT_CAMERA
-            else CameraSelector.DEFAULT_BACK_CAMERA
-            startCamera()
+            if (mMediaPlayer?.isPlaying as Boolean || isReady)
+            {
+                mMediaPlayer?.stop()
+                isReady = false
+            }
         }
     }
 
     public override fun onResume() {
         super.onResume()
         hideSystemUI()
-        startCamera()
-    }
-
-    private fun takePhoto() {
-        val imageCapture = imageCapture ?: return
-
-        val photoFile = createFile(application)
-
-        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-        imageCapture.takePicture(
-            outputOptions,
-            ContextCompat.getMainExecutor(this),
-            object : ImageCapture.OnImageSavedCallback {
-                override fun onError(exc: ImageCaptureException) {
-                    Toast.makeText(
-                        this@CameraActivity,
-                        "error",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-//                    val intent = Intent()
-//                    intent.putExtra("picture", photoFile)
-//                    intent.putExtra("isBackCamera", cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
-//                    intent.putExtra("orientation", getOrientation(photoFile))
-//                    setResult(NewCeritaActivity.CAMERA_X_RESULT, intent)
-                    finish()
-                }
-            }
-        )
-    }
-
-    private fun startCamera() {
-
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-
-        cameraProviderFuture.addListener({
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-            val preview = Preview.Builder()
-                .build()
-                .also {
-                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
-                }
-
-            imageCapture = ImageCapture.Builder().build()
-
-            try {
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    this,
-                    cameraSelector,
-                    preview,
-                    imageCapture
-                )
-
-            } catch (exc: Exception) {
-                Toast.makeText(
-                    this@CameraActivity,
-                    getString(R.string.camera_error),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }, ContextCompat.getMainExecutor(this))
+        init()
+        cameraSource.startCamera()
     }
 
     private fun hideSystemUI() {
@@ -121,18 +71,23 @@ class CameraActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
-    private fun getOrientation(imageFile: File): Int {
-        var orientation = ExifInterface.ORIENTATION_UNDEFINED
+    private fun init() {
+        mMediaPlayer = MediaPlayer()
+        val attribute = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+        mMediaPlayer?.setAudioAttributes(attribute)
+        val afd = applicationContext.resources.openRawResourceFd(R.raw.guitar_background)
         try {
-            val exif = ExifInterface(imageFile.absolutePath)
-            orientation = exif.getAttributeInt(
-                ExifInterface.TAG_ORIENTATION,
-                ExifInterface.ORIENTATION_UNDEFINED
-            )
-        } catch (e: Exception) {
-            val errorMessage = getString(R.string.error_getting_image_orientation, e.message)
-            Log.e(TAG, errorMessage)
+            mMediaPlayer?.setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
-        return orientation
+        mMediaPlayer?.setOnPreparedListener {
+            isReady = true
+            mMediaPlayer?.start()
+        }
+        mMediaPlayer?.setOnErrorListener { _, _, _ -> false }
     }
 }

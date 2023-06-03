@@ -23,6 +23,10 @@ import com.capstone.posturku.ml.PoseDetector
 import com.capstone.posturku.ml.TrackerType
 import com.capstone.posturku.utils.VisualizationUtils
 import com.capstone.posturku.utils.converter.YuvToRgbConverter
+import com.capstone.posturku.utils.rotateBitmap
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.*
 import kotlin.coroutines.resume
@@ -76,6 +80,9 @@ class CameraSource(
     private var imageReaderHandler: Handler? = null
     private var cameraId: String = ""
 
+    private var isFrontCamera = false
+
+
     suspend fun initCamera() {
         camera = openCamera(cameraManager, cameraId)
         imageReader =
@@ -93,13 +100,16 @@ class CameraSource(
                 }
                 yuvConverter.yuvToRgb(image, imageBitmap)
                 // Create rotated version for portrait display
-                val rotateMatrix = Matrix()
-                rotateMatrix.postRotate(90.0f)
+//                val rotateMatrix = Matrix()
+//                rotateMatrix.postRotate(90.0f)
+//
+//                val rotatedBitmap = Bitmap.createBitmap(
+//                    imageBitmap, 0, 0, PREVIEW_WIDTH, PREVIEW_HEIGHT,
+//                    rotateMatrix, false
+//                )
 
-                val rotatedBitmap = Bitmap.createBitmap(
-                    imageBitmap, 0, 0, PREVIEW_WIDTH, PREVIEW_HEIGHT,
-                    rotateMatrix, false
-                )
+                val rotatedBitmap = rotateBitmap(imageBitmap, !isFrontCamera)
+
                 processImage(rotatedBitmap)
                 image.close()
             }
@@ -150,14 +160,16 @@ class CameraSource(
         for (cameraId in cameraManager.cameraIdList) {
             val characteristics = cameraManager.getCameraCharacteristics(cameraId)
 
-            // We don't use a front facing camera in this sample.
+            // Pilih kamera depan atau belakang berdasarkan isFrontCamera
             val cameraDirection = characteristics.get(CameraCharacteristics.LENS_FACING)
-            if (cameraDirection != null &&
-                cameraDirection == CameraCharacteristics.LENS_FACING_FRONT
-            ) {
+            if (isFrontCamera && cameraDirection == CameraCharacteristics.LENS_FACING_BACK) {
+                continue
+            } else if (!isFrontCamera && cameraDirection == CameraCharacteristics.LENS_FACING_FRONT) {
                 continue
             }
+
             this.cameraId = cameraId
+            break
         }
     }
 
@@ -204,6 +216,16 @@ class CameraSource(
             1000
         )
     }
+
+    fun switchCamera() {
+        close()
+        isFrontCamera = !isFrontCamera
+        prepareCamera()
+        CoroutineScope(Dispatchers.Main).launch {
+            initCamera()
+        }
+    }
+
 
     fun close() {
         session?.close()
@@ -302,6 +324,8 @@ class CameraSource(
             Log.d(TAG, e.message.toString())
         }
     }
+
+
 
     interface CameraSourceListener {
         fun onFPSListener(fps: Int)

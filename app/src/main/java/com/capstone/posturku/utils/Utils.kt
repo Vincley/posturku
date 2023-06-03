@@ -65,30 +65,6 @@ fun rotateBitmap(bitmap: Bitmap, isBackCamera: Boolean = false): Bitmap {
     }
 }
 
-fun rotateBitmap(bitmap: Bitmap, isBackCamera: Boolean = false, orientation: Int = 0): Bitmap {
-    val matrix = Matrix()
-
-    if (orientation != 0) {
-        matrix.postRotate(orientation.toFloat())
-    } else {
-        matrix.postRotate(if (isBackCamera) 90f else -90f)
-        if (!isBackCamera) {
-            matrix.postScale(-1f, 1f, bitmap.width / 2f, bitmap.height / 2f)
-        }
-    }
-
-    return Bitmap.createBitmap(
-        bitmap,
-        0,
-        0,
-        bitmap.width,
-        bitmap.height,
-        matrix,
-        true
-    )
-}
-
-
 fun uriToFile(selectedImg: Uri, context: Context): File {
     val contentResolver: ContentResolver = context.contentResolver
     val myFile = createCustomTempFile(context)
