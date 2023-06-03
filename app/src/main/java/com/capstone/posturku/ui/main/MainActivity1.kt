@@ -18,6 +18,7 @@ import com.capstone.posturku.data.UserPreference
 import com.capstone.posturku.databinding.ActivityMain1Binding
 import com.capstone.posturku.ui.camera.pose.PoseActivity
 import com.capstone.posturku.ui.news.NewsActivity
+import com.capstone.posturku.ui.profile.ProfileActivity
 import com.capstone.posturku.ui.welcome.WelcomeActivity1
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
@@ -91,8 +92,8 @@ class MainActivity1 : AppCompatActivity() {
         }
 
         binding.footerProfile.setOnClickListener {
-            Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()
-           // startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
         }
         binding.footerAboutUs.setOnClickListener{
             Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()

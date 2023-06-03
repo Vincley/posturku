@@ -19,4 +19,11 @@
 
     <color name="colorPrimary">#485753</color>
     <color name="colorAccent">#f7890b</color>
+
+    <!-- For ProfileActivity -->
+    <color name="grey">#E9EAEE</color>
+    <color name="yellow">#F8BA0F</color>
+    <color name="goodgrey">#535353</color>
+    <color name="blue">#293859</color>
+    <color name="lightgrey">#EEEEEE</color>
 </resources>
