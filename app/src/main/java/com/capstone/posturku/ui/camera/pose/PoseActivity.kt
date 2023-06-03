@@ -4,6 +4,8 @@ import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.pm.PackageManager
+import android.media.AudioAttributes
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Process
@@ -23,11 +25,14 @@ import com.capstone.posturku.databinding.ActivityPoseBinding
 import com.capstone.posturku.ml.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 class PoseActivity : AppCompatActivity() {
+    private var IsPlayAudio = false
+    private var mMediaPlayer: MediaPlayer? = null
+    private var isReady: Boolean = false
+
     private lateinit var binding: ActivityPoseBinding
-
-
 
     /** A [SurfaceView] for camera preview.   */
     private lateinit var surfaceView: SurfaceView
@@ -144,7 +149,35 @@ class PoseActivity : AppCompatActivity() {
             requestPermission()
         }
 
-        binding.switchCamera.setOnClickListener { cameraSource?.switchCamera() }
+        initAudio()
+//        binding.switchCamera.setOnClickListener { cameraSource?.switchCamera() }
+        binding.switchCamera.setOnClickListener{
+            if(IsPlayAudio){
+                // STOP
+                if (mMediaPlayer?.isPlaying as Boolean || isReady)
+                {
+                    mMediaPlayer?.stop()
+                    isReady = false
+                }
+            }
+            else{
+                // PLAY
+                if (!isReady) {
+                    mMediaPlayer?.prepareAsync()
+                }
+                else {
+                    if (mMediaPlayer?.isPlaying as Boolean)
+                    {
+                        mMediaPlayer?.pause()
+                    }
+                    else
+                    {
+                        mMediaPlayer?.start()}
+                }
+            }
+
+            IsPlayAudio = !IsPlayAudio
+        }
 
     }
 
@@ -394,6 +427,26 @@ class PoseActivity : AppCompatActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun initAudio() {
+        mMediaPlayer = MediaPlayer()
+        val attribute = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .build()
+        mMediaPlayer?.setAudioAttributes(attribute)
+        val afd = applicationContext.resources.openRawResourceFd(R.raw.guitar_background)
+        try {
+            mMediaPlayer?.setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        mMediaPlayer?.setOnPreparedListener {
+            isReady = true
+            mMediaPlayer?.start()
+        }
+        mMediaPlayer?.setOnErrorListener { _, _, _ -> false }
     }
 
 

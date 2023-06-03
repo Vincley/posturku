@@ -27,20 +27,20 @@ object VisualizationUtils {
         Pair(BodyPart.NOSE, BodyPart.RIGHT_EYE),
         Pair(BodyPart.LEFT_EYE, BodyPart.LEFT_EAR),
         Pair(BodyPart.RIGHT_EYE, BodyPart.RIGHT_EAR),
-        Pair(BodyPart.NOSE, BodyPart.LEFT_SHOULDER),
-        Pair(BodyPart.NOSE, BodyPart.RIGHT_SHOULDER),
-        Pair(BodyPart.LEFT_SHOULDER, BodyPart.LEFT_ELBOW),
-        Pair(BodyPart.LEFT_ELBOW, BodyPart.LEFT_WRIST),
-        Pair(BodyPart.RIGHT_SHOULDER, BodyPart.RIGHT_ELBOW),
-        Pair(BodyPart.RIGHT_ELBOW, BodyPart.RIGHT_WRIST),
-        Pair(BodyPart.LEFT_SHOULDER, BodyPart.RIGHT_SHOULDER),
-        Pair(BodyPart.LEFT_SHOULDER, BodyPart.LEFT_HIP),
-        Pair(BodyPart.RIGHT_SHOULDER, BodyPart.RIGHT_HIP),
-        Pair(BodyPart.LEFT_HIP, BodyPart.RIGHT_HIP),
-        Pair(BodyPart.LEFT_HIP, BodyPart.LEFT_KNEE),
-        Pair(BodyPart.LEFT_KNEE, BodyPart.LEFT_ANKLE),
-        Pair(BodyPart.RIGHT_HIP, BodyPart.RIGHT_KNEE),
-        Pair(BodyPart.RIGHT_KNEE, BodyPart.RIGHT_ANKLE)
+//        Pair(BodyPart.NOSE, BodyPart.LEFT_SHOULDER),
+//        Pair(BodyPart.NOSE, BodyPart.RIGHT_SHOULDER),
+//        Pair(BodyPart.LEFT_SHOULDER, BodyPart.LEFT_ELBOW),
+//        Pair(BodyPart.LEFT_ELBOW, BodyPart.LEFT_WRIST),
+//        Pair(BodyPart.RIGHT_SHOULDER, BodyPart.RIGHT_ELBOW),
+//        Pair(BodyPart.RIGHT_ELBOW, BodyPart.RIGHT_WRIST),
+//        Pair(BodyPart.LEFT_SHOULDER, BodyPart.RIGHT_SHOULDER),
+//        Pair(BodyPart.LEFT_SHOULDER, BodyPart.LEFT_HIP),
+//        Pair(BodyPart.RIGHT_SHOULDER, BodyPart.RIGHT_HIP),
+//        Pair(BodyPart.LEFT_HIP, BodyPart.RIGHT_HIP),
+//        Pair(BodyPart.LEFT_HIP, BodyPart.LEFT_KNEE),
+//        Pair(BodyPart.LEFT_KNEE, BodyPart.LEFT_ANKLE),
+//        Pair(BodyPart.RIGHT_HIP, BodyPart.RIGHT_KNEE),
+//        Pair(BodyPart.RIGHT_KNEE, BodyPart.RIGHT_ANKLE)
     )
 
     // Draw line and point indicate body pose
@@ -51,7 +51,7 @@ object VisualizationUtils {
     ): Bitmap {
         val paintCircle = Paint().apply {
             strokeWidth = CIRCLE_RADIUS
-            color = Color.RED
+            color = Color.GREEN
             style = Paint.Style.FILL
         }
         val paintLine = Paint().apply {
