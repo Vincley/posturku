@@ -80,7 +80,7 @@ class CameraSource(
     private var imageReaderHandler: Handler? = null
     private var cameraId: String = ""
 
-    private var isFrontCamera = false
+    private var isFrontCamera = true
 
 
     suspend fun initCamera() {

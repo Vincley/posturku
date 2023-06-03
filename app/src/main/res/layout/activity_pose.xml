@@ -31,7 +31,8 @@ tools:context=".ui.camera.pose.PoseActivity">
         android:src="@drawable/ic_switch_camera"
         android:layout_gravity="end|top"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:alpha="0"/>
 
     <include layout="@layout/bottom_sheet_layout"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
