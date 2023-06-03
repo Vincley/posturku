@@ -7,6 +7,10 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
@@ -18,16 +22,13 @@
         android:theme="@style/Theme.Posturku"
         tools:targetApi="31">
         <activity
-            android:name=".ui.camera.CameraActivity1"
+            android:name=".ui.news.NewsActivity1"
             android:exported="false" />
         <activity
             android:name=".ui.news.NewsReadActivity"
             android:exported="false" />
         <activity
             android:name=".ui.news.NewsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.main.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.welcome.WelcomeActivity1"

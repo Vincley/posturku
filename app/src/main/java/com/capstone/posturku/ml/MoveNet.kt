@@ -4,6 +4,7 @@ import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.gpu.GpuDelegate
 import android.content.Context
 import android.graphics.*
+import android.os.Environment
 import android.os.SystemClock
 import com.capstone.posturku.data.pose.*
 import org.tensorflow.lite.DataType
@@ -13,6 +14,10 @@ import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.image.ops.ResizeWithCropOrPadOp
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -75,6 +80,42 @@ class MoveNet(private val interpreter: Interpreter, private var gpuDelegate: Gpu
     private val inputHeight = interpreter.getInputTensor(0).shape()[2]
     private var outputShape: IntArray = interpreter.getOutputTensor(0).shape()
 
+
+    //region saveBitmapAsPNG()
+    // Fungsi untuk menyimpan bitmap sebagai file PNG
+//    private fun saveBitmapAsPNG(bitmap: Bitmap) : Boolean {
+//        val folderName = "Images"
+//
+//        val epochDatetime = System.currentTimeMillis()
+//        val fileName = "image_$epochDatetime.png"
+//
+//
+//        val directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+//
+//        // Create the file path
+//        val filePath = File(directory, fileName)
+//
+//        // Create the output stream and compress the bitmap into the file
+//        var outputStream: OutputStream? = null
+//        try {
+//            outputStream = FileOutputStream(filePath)
+//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+//            outputStream.flush()
+//            outputStream.close()
+//            return true
+//        } catch (e: IOException) {
+//            e.printStackTrace()
+//            return false
+//        } finally {
+//            try {
+//                outputStream?.close()
+//            } catch (e: IOException) {
+//                e.printStackTrace()
+//            }
+//        }
+//    }
+    //endregion
+
     override fun estimatePoses(bitmap: Bitmap): List<Person> {
         val inferenceStartTimeNanos = SystemClock.elapsedRealtimeNanos()
         if (cropRegion == null) {
@@ -97,6 +138,9 @@ class MoveNet(private val interpreter: Interpreter, private var gpuDelegate: Gpu
                 rect.height().toInt(),
                 Bitmap.Config.ARGB_8888
             )
+            //saveBitmapAsPNG(detectBitmap)
+
+
             Canvas(detectBitmap).drawBitmap(
                 bitmap,
                 -rect.left,

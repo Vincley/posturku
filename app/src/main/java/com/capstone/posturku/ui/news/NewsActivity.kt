@@ -1,14 +1,9 @@
 package com.capstone.posturku.ui.news
 
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.EditText
-import android.widget.SearchView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -30,33 +25,14 @@ class NewsActivity : AppCompatActivity() {
         setupView()
 
         val sectionsPagerAdapter = NewsPagerAdapter(this)
-        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
+        val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = findViewById(R.id.tabs)
+        val tabs: TabLayout = binding.tabs
         TabLayoutMediator(tabs, viewPager)
         { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        getMenuInflater().inflate(R.menu.option_menu, menu);
-
-        val searchItem: MenuItem = menu!!.findItem(R.id.menu3)
-        val searchView: SearchView = searchItem.getActionView() as SearchView
-
-        // Mengatur hint pada SearchView
-        searchView.setQueryHint("Cari...")
-
-        // Mengubah warna teks hint pada SearchView menjadi putih
-
-        // Mengubah warna teks hint pada SearchView menjadi putih
-        val searchEditText: EditText =
-            searchView.findViewById(androidx.appcompat.R.id.search_src_text)
-        searchEditText.setHintTextColor(Color.WHITE)
-
-        return true
     }
 
     private fun setupView() {

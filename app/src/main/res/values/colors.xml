@@ -16,4 +16,7 @@
     <color name="white_alpha_85">#DAFFFFFF</color>
     <color name="purple">#FF6200EE</color>
 
+
+    <color name="colorPrimary">#485753</color>
+    <color name="colorAccent">#f7890b</color>
 </resources>

@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.ViewModelFactory
 import com.capstone.posturku.data.UserPreference
 import com.capstone.posturku.databinding.ActivityMain1Binding
-import com.capstone.posturku.ui.camera.CameraActivity
 import com.capstone.posturku.ui.camera.pose.PoseActivity
 import com.capstone.posturku.ui.news.NewsActivity
 import com.capstone.posturku.ui.welcome.WelcomeActivity1

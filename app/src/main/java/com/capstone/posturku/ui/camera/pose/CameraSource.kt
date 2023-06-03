@@ -21,6 +21,7 @@ import com.capstone.posturku.ml.MoveNetMultiPose
 import com.capstone.posturku.ml.PoseClassifier
 import com.capstone.posturku.ml.PoseDetector
 import com.capstone.posturku.ml.TrackerType
+import com.capstone.posturku.ui.camera.mediaplayer.AudioViewModel
 import com.capstone.posturku.utils.VisualizationUtils
 import com.capstone.posturku.utils.converter.YuvToRgbConverter
 import com.capstone.posturku.utils.rotateBitmap
@@ -28,6 +29,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -99,15 +101,6 @@ class CameraSource(
                         )
                 }
                 yuvConverter.yuvToRgb(image, imageBitmap)
-                // Create rotated version for portrait display
-//                val rotateMatrix = Matrix()
-//                rotateMatrix.postRotate(90.0f)
-//
-//                val rotatedBitmap = Bitmap.createBitmap(
-//                    imageBitmap, 0, 0, PREVIEW_WIDTH, PREVIEW_HEIGHT,
-//                    rotateMatrix, false
-//                )
-
                 val rotatedBitmap = rotateBitmap(imageBitmap, !isFrontCamera)
 
                 processImage(rotatedBitmap)
@@ -312,6 +305,25 @@ class CameraSource(
             )
             surfaceView.holder.unlockCanvasAndPost(canvas)
         }
+
+        val calendar = Calendar.getInstance()
+        val minute = calendar.get(Calendar.MINUTE)
+        val second = calendar.get(Calendar.SECOND)
+
+        if(second==0){
+            if (minute % 2 != 0) {
+                listener?.PlayAudio()
+                val endTime = System.currentTimeMillis()
+                Log.d(TAG, "playAudio: $endTime ms")
+            }
+            else{
+                listener?.StopAudio()
+                val endTime = System.currentTimeMillis()
+                Log.d(TAG, "stopAudio: $endTime ms")
+
+            }
+        }
+
     }
 
     private fun stopImageReaderThread() {
@@ -331,5 +343,8 @@ class CameraSource(
         fun onFPSListener(fps: Int)
 
         fun onDetectedInfo(personScore: Float?, poseLabels: List<Pair<String, Float>>?)
+
+        fun PlayAudio()
+        fun StopAudio()
     }
 }
