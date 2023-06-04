@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="#EFF0FC"
     android:orientation="vertical"
     tools:context=".ui.profile.ProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:background="#293859" />
+        android:background="@drawable/top_background_profile"
+        android:src="@drawable/ic_arrow_back_24dp" />
 
     <!--Top Header Layout-->
     <LinearLayout
@@ -222,7 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/circularbordersolid"
+                android:background="@drawable/banner_background"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -236,7 +237,7 @@
                     android:padding="13dp"
                     android:text="User Info"
                     android:textAllCaps="true"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/colorAccent"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -322,7 +323,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Edit"
                                 android:fontFamily="@font/proximanovaregular"
-                                android:textColor="#FFCF66"
+                                android:textColor="@color/colorAccent"
                                 android:layout_marginEnd="10dp"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -366,7 +367,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Edit"
-                            android:textColor="#FFCF66"
+                            android:textColor="@color/colorAccent"
                             android:layout_marginEnd="10dp"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -481,7 +482,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Edit"
-                            android:textColor="#FFCF66"
+                            android:textColor="@color/colorAccent"
                             android:textSize="14sp" />
                     </LinearLayout>
 

@@ -1,8 +1,11 @@
 package com.capstone.posturku.ui.profile
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.capstone.posturku.R
@@ -18,6 +21,7 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+        hideSystemUI()
 
         personalinfo = findViewById(R.id.personalinfo)
         experience = findViewById(R.id.experience)
@@ -35,7 +39,7 @@ class ProfileActivity : AppCompatActivity() {
             personalinfo.visibility = View.VISIBLE
             experience.visibility = View.GONE
             review.visibility = View.GONE
-            personalinfobtn.setTextColor(resources.getColor(R.color.blue))
+            personalinfobtn.setTextColor(resources.getColor(R.color.colorAccent))
             experiencebtn.setTextColor(resources.getColor(R.color.grey))
             reviewbtn.setTextColor(resources.getColor(R.color.grey))
         }
@@ -45,7 +49,7 @@ class ProfileActivity : AppCompatActivity() {
             experience.visibility = View.VISIBLE
             review.visibility = View.GONE
             personalinfobtn.setTextColor(resources.getColor(R.color.grey))
-            experiencebtn.setTextColor(resources.getColor(R.color.blue))
+            experiencebtn.setTextColor(resources.getColor(R.color.colorAccent))
             reviewbtn.setTextColor(resources.getColor(R.color.grey))
         }
 
@@ -55,7 +59,20 @@ class ProfileActivity : AppCompatActivity() {
             review.visibility = View.VISIBLE
             personalinfobtn.setTextColor(resources.getColor(R.color.grey))
             experiencebtn.setTextColor(resources.getColor(R.color.grey))
-            reviewbtn.setTextColor(resources.getColor(R.color.blue))
+            reviewbtn.setTextColor(resources.getColor(R.color.colorAccent))
         }
+    }
+
+    private fun hideSystemUI() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
     }
 }
