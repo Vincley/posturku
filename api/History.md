@@ -43,15 +43,15 @@ Response:
       "StartTime": 1685863779,
       "EndTime": 1685867379,
       "DurationBad": 20,
-      "DurationGood": 40,
+      "DurationGood": 40
     },
-        {
+    {
       "id": 2,
       "StartTime": 1685863779,
       "EndTime": 1685867379,
-      "DurationBad": 20,
-      "DurationGood": 40,
-    },
+      "DurationBad": 10,
+      "DurationGood": 50
+    }
   ]
 }
 ```
