@@ -17,6 +17,7 @@ import com.capstone.posturku.ViewModelFactory
 import com.capstone.posturku.data.UserPreference
 import com.capstone.posturku.databinding.ActivityMain1Binding
 import com.capstone.posturku.ui.camera.pose.PoseActivity
+import com.capstone.posturku.ui.history.HistoryActivity
 import com.capstone.posturku.ui.news.NewsActivity
 import com.capstone.posturku.ui.profile.ProfileActivity
 import com.capstone.posturku.ui.welcome.WelcomeActivity1
@@ -113,8 +114,8 @@ class MainActivity1 : AppCompatActivity() {
             val intent = Intent(this, NewsActivity::class.java)
             startActivity(intent)        }
         binding.mainHistory.setOnClickListener{
-            Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()
-        }
+            val intent = Intent(this, HistoryActivity::class.java)
+            startActivity(intent)         }
         binding.mainFeedback.setOnClickListener {
             Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()
         }

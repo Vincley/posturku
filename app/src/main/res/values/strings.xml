@@ -87,8 +87,8 @@
 
 
     <!-- For NewsActivity -->
-    <string name="tab_text_1">Home</string>
-    <string name="tab_text_2">Profile</string>
+    <string name="tab_text_1">Articles</string>
+    <string name="tab_text_2">Favorites</string>
     <string-array name="data_name">
         <item>Ahmad Dahlan</item>
         <item>Ahmad Yani</item>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.history.HistoryActivity">
+
+    <TextView
+        android:id="@+id/vertical_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_background_profile"
+        android:paddingStart="8dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="16dp"
+        android:text="Histories"
+        android:textColor="@color/white"
+        android:textDirection="locale"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <xyz.sangcomz.stickytimelineview.TimeLineRecyclerView
+        android:id="@+id/vertical_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:isSticky="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vertical_text_view"
+        app:timeLineColor="#727DFF"
+        app:timeLineDotColor="#4C6184"
+        app:timeLineDotRadius="4dp"
+        app:timeLineDotStrokeColor="#ffffff"
+        app:timeLineDotStrokeSize="2dp"
+        app:timeLineMode="vertical"
+        app:timeLineWidth="4dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

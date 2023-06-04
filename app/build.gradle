@@ -95,6 +95,10 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite-support:0.3.0'
     //endregion
 
-    implementation 'com.makeramen:roundedimageview:2.3.0'
+    //region StickyTimeLine
+    implementation 'io.github.sangcomz:StickyTimeLine:1.0.0'
+    //endregion
+
+//    implementation 'com.makeramen:roundedimageview:2.3.0'
 
 }
