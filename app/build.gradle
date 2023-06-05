@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 
     // Add the Google services Gradle plugin
     id 'com.google.gms.google-services'
@@ -80,6 +81,9 @@ dependencies {
     implementation 'androidx.room:room-paging:2.4.0'
     implementation 'androidx.room:room-ktx:2.4.0-rc01'
     //endregion
+
+    implementation 'androidx.room:room-runtime:2.3.0'
+    kapt 'androidx.room:room-compiler:2.3.0'
 
     //region Camera
     def camerax_version = "1.2.2"

@@ -43,6 +43,9 @@ class MoveNet(private val interpreter: Interpreter, private var gpuDelegate: Gpu
         private const val LIGHTNING_FILENAME = "movenet_lightning.tflite"
         private const val THUNDER_FILENAME = "movenet_thunder.tflite"
 
+//        private const val LIGHTNING_FILENAME = "pose_classifier.tflite"
+//        private const val THUNDER_FILENAME = "pose_classifier.tflite"
+
         // allow specifying model type.
         fun create(context: Context, device: Device, modelType: ModelType): MoveNet {
             val options = Interpreter.Options()
