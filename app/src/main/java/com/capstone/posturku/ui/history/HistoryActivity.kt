@@ -158,7 +158,6 @@ class HistoryActivity : AppCompatActivity() {
         }
     }
 
-
     private fun obtainViewModel(activity: AppCompatActivity): HistoryViewModel {
         val factory = ViewModelRoomFactory.getInstance(activity.application)
         return ViewModelProvider(activity, factory).get(HistoryViewModel::class.java)
