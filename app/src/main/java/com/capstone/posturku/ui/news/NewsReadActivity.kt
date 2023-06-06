@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.webkit.WebView
@@ -43,16 +44,21 @@ class NewsReadActivity : AppCompatActivity() {
             @Suppress("DEPRECATION")
             intent.getParcelableExtra<Article>("DATA")
         }
+
+        binding.progressBarRead.visibility = View.VISIBLE
         if (article != null) {
             if(article.url != null){
                 this.article = article
                 newsWebView?.apply {
-                    webViewClient = WebViewClient()
+                    webViewClient = object : WebViewClient() {
+                        override fun onPageFinished(view: WebView?, url: String?) {
+                            binding.progressBarRead.visibility = View.GONE
+                        }
+                    }
                     loadUrl(article.url)
                 }
             }
         }
-
         setFavorite()
     }
 
@@ -60,7 +66,7 @@ class NewsReadActivity : AppCompatActivity() {
     private fun setFavorite(){
         favoriteViewModel.getFavoriteByUrl(article.url).observe(this) { favorite ->
             if (favorite != null) {
-                isFavorite = true;
+                isFavorite = true
                 binding.fab.setImageResource(R.drawable.ic_favorite)
             }
             else{
