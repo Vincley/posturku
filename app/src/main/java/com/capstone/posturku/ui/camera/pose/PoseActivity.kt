@@ -23,8 +23,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.capstone.posturku.R
 import com.capstone.posturku.data.pose.Device
-import com.capstone.posturku.databinding.ActivityMain1Binding
-import com.capstone.posturku.databinding.ActivityPoseBinding
 import com.capstone.posturku.ml.*
 import com.capstone.posturku.ui.camera.mediaplayer.AudioViewModel
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +30,12 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 import java.util.*
 import androidx.lifecycle.Observer
+import com.capstone.posturku.ViewModelRoomFactory
+import com.capstone.posturku.data.room.history.HistoryDb
+import com.capstone.posturku.databinding.ActivityPoseBinding
+import com.capstone.posturku.ui.history.HistoryViewModel
+import com.capstone.posturku.ui.news.FavoriteViewModel
+import com.capstone.posturku.utils.converter.DateConverter
 
 class PoseActivity : AppCompatActivity() {
 
@@ -40,9 +44,8 @@ class PoseActivity : AppCompatActivity() {
     private var mMediaPlayer: MediaPlayer? = null
     private var isReady: Boolean = false
     private lateinit var audioViewModel: AudioViewModel
+    private lateinit var historyViewModel: HistoryViewModel
 
-    private lateinit var handler: Handler
-    private lateinit var runnable: Runnable
 
 
 
@@ -187,18 +190,19 @@ class PoseActivity : AppCompatActivity() {
             }
         })
 
-        //region For Test
-//        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
-//        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+        historyViewModel = obtainViewModel(this@PoseActivity)
 
-//        handler = Handler()
-//        runnable = object : Runnable {
-//            override fun run() {
-//                checkMinuteAndPerformAction()
-//                handler.postDelayed(this, 1000) // Memperbarui setiap 1 detik
-//            }
-//        }
-        //endregion
+        val calendar = Calendar.getInstance()
+        calendar.time = Date()
+        calendar.add(Calendar.HOUR_OF_DAY, 1)
+
+        val historyDb = HistoryDb(
+            startTime = DateConverter.convertToEpochMilliseconds(Date()),
+            endTime = DateConverter.convertToEpochMilliseconds(calendar.time),
+            durationBad = 10,
+            durationGood = 20
+        )
+        historyViewModel.insert(historyDb)
 
     }
 
@@ -522,6 +526,11 @@ class PoseActivity : AppCompatActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): HistoryViewModel {
+        val factory = ViewModelRoomFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory).get(HistoryViewModel::class.java)
     }
 
 

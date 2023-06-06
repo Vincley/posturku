@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.capstone.posturku.data.room.history.HistoryDb
+import com.capstone.posturku.data.room.history.HistoryDbDao
 
-@Database(entities = [ArticleDb::class], version = 1)
+@Database(entities = [ArticleDb::class, HistoryDb::class], version = 1)
 abstract class ArticleDbRoomDatabase : RoomDatabase() {
 
     abstract fun artcileDbDao(): ArticleDbDao
+    abstract fun historyDbDao(): HistoryDbDao
 
     companion object {
         @Volatile
@@ -19,7 +22,7 @@ abstract class ArticleDbRoomDatabase : RoomDatabase() {
             if (INSTANCE == null) {
                 synchronized(ArticleDbRoomDatabase::class.java) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext,
-                        ArticleDbRoomDatabase::class.java, "articleDb_database")
+                        ArticleDbRoomDatabase::class.java, "posturku_database")
                         .build()
                 }
             }

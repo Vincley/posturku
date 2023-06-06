@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.data.UserPreference
 import com.capstone.posturku.data.repository.NewsRepository
+import com.capstone.posturku.ui.history.HistoryViewModel
 import com.capstone.posturku.ui.login.LoginViewModel
 import com.capstone.posturku.ui.main.MainViewModel
 import com.capstone.posturku.ui.news.FavoriteViewModel
@@ -63,12 +64,14 @@ class ViewModelRoomFactory private constructor(private val mApplication: Applica
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(FavoriteViewModel::class.java)) {
-            return FavoriteViewModel(mApplication) as T
+        return when {
+            modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
+                FavoriteViewModel(mApplication) as T
+            }
+            modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
+                HistoryViewModel(mApplication) as T
+            }
+            else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
-//        else if (modelClass.isAssignableFrom(NoteAddUpdateViewModel::class.java)) {
-//            return NoteAddUpdateViewModel(mApplication) as T
-//        }
-        throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }
 }

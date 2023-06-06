@@ -7,18 +7,24 @@ import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.posturku.R
+import com.capstone.posturku.ViewModelRoomFactory
+import com.capstone.posturku.data.room.history.HistoryDb
 import com.capstone.posturku.databinding.ActivityHistoryBinding
 import com.capstone.posturku.ui.history.temp.Singer
 import com.capstone.posturku.ui.history.temp.SingerAdapter2
 import com.capstone.posturku.ui.history.temp.SingerRepo
+import com.capstone.posturku.utils.converter.DateConverter
 import xyz.sangcomz.stickytimelineview.callback.SectionCallback
 import xyz.sangcomz.stickytimelineview.model.SectionInfo
+import java.util.Date
 
 class HistoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryBinding
+    private lateinit var historyViewModel: HistoryViewModel
 
     val icFinkl: Drawable? by lazy {
         AppCompatResources.getDrawable(this, R.drawable.ic_finkl)
@@ -41,6 +47,7 @@ class HistoryActivity : AppCompatActivity() {
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         hideSystemUI()
+        historyViewModel = obtainViewModel(this@HistoryActivity)
 
         initVerticalRecyclerView()
 
@@ -63,7 +70,20 @@ class HistoryActivity : AppCompatActivity() {
     }
 
     //Get data method
-    private fun getSingerList(): List<Singer> = SingerRepo().singerList
+    private fun getSingerList(): List<Singer>
+    {
+        val singerList: MutableList<Singer> = mutableListOf()
+        historyViewModel.getHistoriesOneMonth().observe(this) { data ->
+            if(data != null){
+                val results = convertHistoryToSinger(data)
+                singerList.addAll(results)
+            }
+            else{
+                singerList.addAll(SingerRepo().singerList)
+            }
+        }
+        return singerList
+    }
 
 
     //Get SectionCallback method
@@ -123,5 +143,24 @@ class HistoryActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
+    }
+
+    fun convertHistoryToSinger(historyList: List<HistoryDb>): List<Singer> {
+        return historyList.mapIndexed { index, history ->
+            Singer(
+                group = "detection",
+                debuted = DateConverter.convertToDateLocal(history.startTime),
+                name = "Detection ${historyList.size - index}",
+                start = DateConverter.convertToTimeLocal(history.startTime),
+                durationGood = history.durationGood,
+                durationBad = history.durationBad
+            )
+        }
+    }
+
+
+    private fun obtainViewModel(activity: AppCompatActivity): HistoryViewModel {
+        val factory = ViewModelRoomFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory).get(HistoryViewModel::class.java)
     }
 }

@@ -45,10 +45,15 @@ class SingerAdapter2( private val singerList: List<Singer>): RecyclerView.Adapte
     override fun onBindViewHolder(holder: SingerAdapter2.ViewHolder, position: Int) {
         val singer = singerList[position]
         holder.fullName.text = singer.name
+        holder.time.text = "Start: ${singer.start}"
+        holder.durationGood.text = "Good: ${singer.durationGood} Minutes"
+        holder.durationBad.text = "Bad: ${singer.durationBad} Minutes"
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val fullName: TextView = view.findViewById<View>(R.id.full_name_tv) as TextView
+        val time: TextView = view.findViewById<View>(R.id.tv_date) as TextView
+        val fullName: TextView = view.findViewById<View>(R.id.tv_name) as TextView
+        val durationGood: TextView = view.findViewById<View>(R.id.tv_durationGood) as TextView
+        val durationBad: TextView = view.findViewById<View>(R.id.tv_durationBad) as TextView
     }
-
 }
