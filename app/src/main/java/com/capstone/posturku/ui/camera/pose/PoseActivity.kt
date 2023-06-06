@@ -46,8 +46,8 @@ class PoseActivity : AppCompatActivity() {
     private lateinit var audioViewModel: AudioViewModel
     private lateinit var historyViewModel: HistoryViewModel
 
-
-
+    private var cameraOpenTime: Date? = null
+    private var cameraCloseTime: Date? = null
 
     private lateinit var binding: ActivityPoseBinding
 
@@ -192,17 +192,9 @@ class PoseActivity : AppCompatActivity() {
 
         historyViewModel = obtainViewModel(this@PoseActivity)
 
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        calendar.add(Calendar.HOUR_OF_DAY, 1)
 
-        val historyDb = HistoryDb(
-            startTime = DateConverter.convertToEpochMilliseconds(Date()),
-            endTime = DateConverter.convertToEpochMilliseconds(calendar.time),
-            durationBad = 10,
-            durationGood = 20
-        )
-        historyViewModel.insert(historyDb)
+
+
 
     }
 
@@ -217,26 +209,28 @@ class PoseActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
+        cameraCloseTime = Date()
         cameraSource?.close()
         cameraSource = null
         super.onPause()
     }
-    //endregion
 
-    //region For Test
-//
-//    private fun checkMinuteAndPerformAction() {
-//        val calendar = Calendar.getInstance()
-//        val currentMinute = calendar.get(Calendar.MINUTE)
-//
-//        if (currentMinute % 2 == 0 && !IsPlayAudio) {
-//            // Menit genap dan audio tidak sedang diputar
-//            PlayAudio()
-//        } else if (currentMinute % 2 != 0 && IsPlayAudio) {
-//            // Menit ganjil dan audio sedang diputar
-//            StopAudio()
-//        }
-//    }
+    override fun onDestroy() {
+        super.onDestroy()
+
+        val calendar = Calendar.getInstance()
+        calendar.time = Date()
+        calendar.add(Calendar.HOUR_OF_DAY, 1)
+
+        val duration = getDuration()
+        val historyDb = HistoryDb(
+            startTime = DateConverter.convertToEpochMilliseconds(Date()),
+            endTime = DateConverter.convertToEpochMilliseconds(calendar.time),
+            durationBad = duration/2,
+            durationGood = duration
+        )
+        historyViewModel.insert(historyDb)
+    }
     //endregion
 
     //region For Audio
@@ -317,6 +311,7 @@ class PoseActivity : AppCompatActivity() {
     private fun openCamera() {
         if (isCameraPermissionGranted()) {
             if (cameraSource == null) {
+                cameraOpenTime = Date()
                 cameraSource =
                     CameraSource(surfaceView, object : CameraSource.CameraSourceListener {
                         override fun onFPSListener(fps: Int) {
@@ -533,7 +528,13 @@ class PoseActivity : AppCompatActivity() {
         return ViewModelProvider(activity, factory).get(HistoryViewModel::class.java)
     }
 
+    fun getDuration() : Int {
+        cameraCloseTime = Date()
+        val durationInMilliseconds = cameraCloseTime?.time?.minus(cameraOpenTime?.time ?: 0) ?: 0
+        val durationInMinutes = durationInMilliseconds / (60 * 1000)
 
+        return durationInMinutes.toInt()
+    }
 
     companion object {
         private const val FRAGMENT_DIALOG = "dialog"

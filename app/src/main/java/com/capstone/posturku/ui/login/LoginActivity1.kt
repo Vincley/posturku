@@ -188,9 +188,11 @@ class LoginActivity1 : AppCompatActivity() {
         try {
             val account: GoogleSignInAccount? =completedTask.getResult(ApiException::class.java)
             if (account != null) {
-                val result = LoginResult("", "", "")
-                loginViewModel.login(result)
-                callAlert()
+                if(account.email != null){
+                    val result = LoginResult(account.email!!, "", "")
+                    loginViewModel.login(result)
+                    callAlert()
+                }
             }
         } catch (e: ApiException){
             Toast.makeText(this,e.toString(), Toast.LENGTH_SHORT).show()

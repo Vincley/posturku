@@ -74,9 +74,14 @@ class MainActivity1 : AppCompatActivity() {
         )[MainViewModel::class.java]
 
         auth = Firebase.auth
-        val firebaseUser = auth.currentUser
         mainViewModel.getUser().observe(this, { user ->
-            if (user.isLogin && firebaseUser != null){
+            if (user.isLogin){
+//                 FirebaseAuth.AuthStateListener { t ->
+//                     val firebaseUser = auth.currentUser
+//                     if(firebaseUser != null){
+//
+//                     }
+//                 }
                 //binding.nameTextView.text = getString(R.string.greeting, user.name)
             } else {
                 startActivity(Intent(this, WelcomeActivity1::class.java))
