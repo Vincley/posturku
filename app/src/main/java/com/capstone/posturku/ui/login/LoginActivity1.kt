@@ -1,17 +1,14 @@
 package com.capstone.posturku.ui.login
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -19,7 +16,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.R
 import com.capstone.posturku.ViewModelFactory
-import com.capstone.posturku.data.UserPreference
+import com.capstone.posturku.data.preferences.UserPreference
 import com.capstone.posturku.databinding.ActivityLogin1Binding
 import com.capstone.posturku.model.LoginResult
 import com.capstone.posturku.model.UserModel
@@ -32,10 +29,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -54,7 +49,6 @@ class LoginActivity1 : AppCompatActivity() {
 
     private var isEmailValid = false
     private var isPasssValid = false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -159,7 +153,6 @@ class LoginActivity1 : AppCompatActivity() {
                             val result = LoginResult(email, password, "")
                             loginViewModel.login(result)
                             callAlert()
-                            //Toast.makeText(this, "Successfully LoggedIn", Toast.LENGTH_SHORT).show()
                         } else
                             Toast.makeText(this, "Log In failed ", Toast.LENGTH_SHORT).show()
                     }
@@ -171,10 +164,7 @@ class LoginActivity1 : AppCompatActivity() {
     private  fun signInGoogle(){
         val signInIntent: Intent =mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent,Req_Code)
-
     }
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

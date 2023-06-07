@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.capstone.posturku.data.UserPreference
+import com.capstone.posturku.data.preferences.UserPreference
 import com.capstone.posturku.model.LoginResult
 import com.capstone.posturku.model.UserModel
 import kotlinx.coroutines.launch

@@ -15,7 +15,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.R
 import com.capstone.posturku.ViewModelFactory
-import com.capstone.posturku.data.UserPreference
+import com.capstone.posturku.data.preferences.UserPreference
 import com.capstone.posturku.databinding.ActivitySignup1Binding
 import com.capstone.posturku.model.UserModel
 import com.capstone.posturku.ui.custom.EmailEditTextCustom

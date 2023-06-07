@@ -191,11 +191,6 @@ class PoseActivity : AppCompatActivity() {
         })
 
         historyViewModel = obtainViewModel(this@PoseActivity)
-
-
-
-
-
     }
 
     override fun onStart() {

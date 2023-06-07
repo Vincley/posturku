@@ -1,4 +1,4 @@
-package com.capstone.posturku.data
+package com.capstone.posturku.data.preferences
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -37,6 +37,7 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
 
     suspend fun login(result: LoginResult) {
         dataStore.edit { preferences ->
+            preferences[NAME_KEY] = result.name
             preferences[STATE_KEY] = true
             preferences[TOKEN_KEY] = "Bearer ${result.token}"
         }

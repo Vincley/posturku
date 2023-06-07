@@ -19,7 +19,7 @@
 //import androidx.lifecycle.ViewModelProvider
 //import com.capstone.posturku.R
 //import com.capstone.posturku.ViewModelFactory
-//import com.capstone.posturku.data.UserPreference
+//import com.capstone.posturku.data.preferences.UserPreference
 //import com.capstone.posturku.ui.welcome.WelcomeActivity
 //import android.provider.Settings
 //import android.widget.Toast

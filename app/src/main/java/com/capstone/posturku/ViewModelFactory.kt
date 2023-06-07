@@ -3,13 +3,14 @@ package com.capstone.posturku
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.capstone.posturku.data.UserPreference
+import com.capstone.posturku.data.preferences.UserPreference
 import com.capstone.posturku.data.repository.NewsRepository
 import com.capstone.posturku.ui.history.HistoryViewModel
 import com.capstone.posturku.ui.login.LoginViewModel
 import com.capstone.posturku.ui.main.MainViewModel
 import com.capstone.posturku.ui.news.FavoriteViewModel
 import com.capstone.posturku.ui.news.NewsViewModel
+import com.capstone.posturku.ui.profile.ProfileViewModel
 import com.capstone.posturku.ui.signup.SignupViewModel
 
 class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
@@ -70,6 +71,9 @@ class ViewModelRoomFactory private constructor(private val mApplication: Applica
             }
             modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
                 HistoryViewModel(mApplication) as T
+            }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(mApplication) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

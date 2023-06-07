@@ -10,7 +10,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.R
+import com.capstone.posturku.ViewModelRoomFactory
+import com.capstone.posturku.data.room.profile.ProfileDb
 import com.capstone.posturku.databinding.ActivityProfileBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
@@ -20,14 +23,15 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var review: LinearLayout
     private lateinit var personalinfobtn: TextView
     private lateinit var experiencebtn: TextView
-//    private lateinit var reviewbtn: TextView
     private lateinit var binding: ActivityProfileBinding
+    private lateinit var profileViewModel: ProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         hideSystemUI()
+        profileViewModel = obtainViewModel(this@ProfileActivity)
 
         initializeViews()
         setInitialVisibility()
@@ -35,6 +39,23 @@ class ProfileActivity : AppCompatActivity() {
         setAboutMeClickListener()
         setContactClickListener()
         setInterestsClickListener()
+        setUI()
+    }
+
+    override fun onDestroy() {
+        val profile = ProfileDb(
+            aboutMe = binding.tvProfileAboutmeContent.text.toString(),
+            name = binding.tvProfileName.text.toString(),
+            phone = binding.tvProfilePhone.text.toString(),
+            email = binding.tvProfileEmail.text.toString(),
+            address = binding.tvProfileAddress.text.toString(),
+            skill = binding.tvProfileSkill.text.toString(),
+            hobby = binding.tvProfileHobby.text.toString()
+        )
+        profileViewModel.setData(profile)
+
+        super.onDestroy()
+
     }
 
     private fun initializeViews() {
@@ -106,6 +127,7 @@ class ProfileActivity : AppCompatActivity() {
 
             saveButton?.setOnClickListener {
                 val new = nameEditText?.text.toString()
+
                 binding.tvProfileAboutmeContent.text = new
                 bottomSheetDialog.dismiss()
             }
@@ -121,29 +143,24 @@ class ProfileActivity : AppCompatActivity() {
 
             val name: EditText? = bottomSheetDialog.findViewById(R.id.et_profile_contact_name)
             val phone: EditText? = bottomSheetDialog.findViewById(R.id.et_profile_contact_phone)
-            val email: EditText? = bottomSheetDialog.findViewById(R.id.et_profile_contact_email)
             val address: EditText? = bottomSheetDialog.findViewById(R.id.et_profile_contact_address)
             val save: Button? = bottomSheetDialog.findViewById(R.id.et_profile_contact_save)
 
             val currentName = binding.tvProfileName.text.toString()
             val currentPhone = binding.tvProfilePhone.text.toString()
-            val currentEmail = binding.tvProfileEmail.text.toString()
             val currentAddress = binding.tvProfileAddress.text.toString()
 
             name?.setText(currentName)
             phone?.setText(currentPhone)
-            email?.setText(currentEmail)
             address?.setText(currentAddress)
 
             save?.setOnClickListener {
                 val newName = name?.text.toString()
                 val newPhone = phone?.text.toString()
-                val newEmail = email?.text.toString()
                 val newAddress = address?.text.toString()
 
                 binding.tvProfileName.text = newName
                 binding.tvProfilePhone.text = newPhone
-                binding.tvProfileEmail.text = newEmail
                 binding.tvProfileAddress.text = newAddress
                 bottomSheetDialog.dismiss()
             }
@@ -180,6 +197,25 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun setUI(){
+        profileViewModel.getProfile().observe(this) { data ->
+            if(data != null){
+                // AboutMe
+                binding.tvProfileAboutmeContent.text = data.aboutMe
+
+                // Contact
+                binding.tvProfileName.text = data.name
+                binding.tvProfilePhone.text = data.phone
+                binding.tvProfileEmail.text = data.email
+                binding.tvProfileAddress.text = data.address
+
+                // Interest
+                binding.tvProfileSkill.text = data.skill
+                binding.tvProfileHobby.text = data.hobby
+            }
+        }
+    }
+
 
     private fun hideSystemUI() {
         @Suppress("DEPRECATION")
@@ -192,5 +228,10 @@ class ProfileActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): ProfileViewModel {
+        val factory = ViewModelRoomFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory).get(ProfileViewModel::class.java)
     }
 }

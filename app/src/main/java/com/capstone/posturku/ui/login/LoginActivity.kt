@@ -19,7 +19,7 @@
 //import com.capstone.posturku.R
 //import com.capstone.posturku.ViewModelFactory
 //import com.capstone.posturku.model.UserModel
-//import com.capstone.posturku.data.UserPreference
+//import com.capstone.posturku.data.preferences.UserPreference
 //import com.capstone.posturku.databinding.ActivityLoginBinding
 //import com.capstone.posturku.model.LoginRequest
 //import com.capstone.posturku.model.LoginResult

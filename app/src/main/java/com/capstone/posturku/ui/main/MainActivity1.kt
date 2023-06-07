@@ -14,7 +14,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.ViewModelFactory
-import com.capstone.posturku.data.UserPreference
+import com.capstone.posturku.data.preferences.UserPreference
 import com.capstone.posturku.databinding.ActivityMain1Binding
 import com.capstone.posturku.ui.camera.pose.PoseActivity
 import com.capstone.posturku.ui.history.HistoryActivity
@@ -82,7 +82,7 @@ class MainActivity1 : AppCompatActivity() {
 //
 //                     }
 //                 }
-                //binding.nameTextView.text = getString(R.string.greeting, user.name)
+                binding.tvMainBackgroundTop1.text = user.name
             } else {
                 startActivity(Intent(this, WelcomeActivity1::class.java))
                 finish()
@@ -93,8 +93,7 @@ class MainActivity1 : AppCompatActivity() {
     private fun setupAction() {
 
         binding.footerHome.setOnClickListener{
-//            val intent = Intent(this@MainActivity, ListCeritaActivity::class.java)
-//            startActivity(intent)
+
         }
 
         binding.footerProfile.setOnClickListener {
@@ -103,8 +102,7 @@ class MainActivity1 : AppCompatActivity() {
         }
         binding.footerAboutUs.setOnClickListener{
             Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()
-//            val intent = Intent(this@MainActivity, MapActivity::class.java)
-//            startActivity(intent)
+
         }
         binding.footerLogout.setOnClickListener {
             auth.signOut()
@@ -131,64 +129,15 @@ class MainActivity1 : AppCompatActivity() {
     }
 
     private fun SetupCamera(){
-//        if (!allPermissionsGranted()) {
-//            ActivityCompat.requestPermissions(
-//                this,
-//                REQUIRED_PERMISSIONS,
-//                REQUEST_CODE_PERMISSIONS
-//            )
-//        }
         binding.caremaButton.setOnClickListener { startCameraX() }
     }
 
 
     private fun startCameraX() {
-//        val intent = Intent(this, CameraActivity::class.java)
-//        val intent = Intent(this, PoseActivity::class.java)
-//        launcherIntentCameraX.launch(intent)
 
         val intent = Intent(this, PoseActivity::class.java)
         startActivity(intent)
     }
-
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<String>,
-//        grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-//            if (!allPermissionsGranted()) {
-//                Toast.makeText(
-//                    this,
-//                    getString(R.string.permission_denied),
-//                    Toast.LENGTH_SHORT
-//                ).show()
-//                finish()
-//            }
-//        }
-//    }
-
-//    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-//        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
-//    }
-
-//    private val launcherIntentCameraX = registerForActivityResult(
-//        ActivityResultContracts.StartActivityForResult()
-//    ) {
-//        if (it.resultCode == CAMERA_X_RESULT) {
-//            val myFile = it.data?.getSerializableExtra("picture") as File
-//            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
-//            val orientation = it.data?.getIntExtra("orientation", ExifInterface.ORIENTATION_UNDEFINED)
-//
-//            getFile = myFile
-//            val result = rotateBitmap(
-//                BitmapFactory.decodeFile(getFile?.path),
-//                isBackCamera,
-//            )
-//            //binding.previewImageView.setImageBitmap(result)
-//        }
-//    }
 
     private fun InitAppCheck(){
         Firebase.initialize(context = this)
