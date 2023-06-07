@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Name"
+        android:textSize="17sp"
+        android:fontFamily="@font/proximanovaregular"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/et_profile_contact_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Enter Your Name"
+        android:inputType="phone" />
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone Number"
+        android:textSize="17sp"
+        android:fontFamily="@font/proximanovaregular"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/et_profile_contact_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Enter Phone Number"
+        android:inputType="phone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="17sp"
+        android:fontFamily="@font/proximanovaregular"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/et_profile_contact_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Enter Age"
+        android:inputType="textEmailAddress"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:textSize="17sp"
+        android:fontFamily="@font/proximanovaregular"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/et_profile_contact_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Enter Address"
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/et_profile_contact_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Save" />
+
+</LinearLayout>
