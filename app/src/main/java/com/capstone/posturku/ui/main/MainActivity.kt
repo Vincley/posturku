@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.EditText
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -19,6 +18,7 @@ import com.capstone.posturku.R
 import com.capstone.posturku.ViewModelFactory
 import com.capstone.posturku.data.preferences.UserPreference
 import com.capstone.posturku.databinding.ActivityMain1Binding
+import com.capstone.posturku.ui.aboutMe.AboutUsActivity
 import com.capstone.posturku.ui.camera.pose.PoseActivity
 import com.capstone.posturku.ui.history.HistoryActivity
 import com.capstone.posturku.ui.news.NewsActivity
@@ -105,8 +105,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.footerAboutUs.setOnClickListener{
-            Toast.makeText(this, "Still developing", Toast.LENGTH_SHORT).show()
-
+            val intent = Intent(this, AboutUsActivity::class.java)
+            startActivity(intent)
         }
         binding.footerLogout.setOnClickListener {
             auth.signOut()
