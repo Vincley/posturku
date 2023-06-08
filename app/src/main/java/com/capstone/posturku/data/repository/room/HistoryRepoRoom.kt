@@ -1,4 +1,4 @@
-package com.capstone.posturku.data.repository
+package com.capstone.posturku.data.repository.room
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-class HistoryRepository(application: Application) {
+class HistoryRepoRoom(application: Application) {
     private val mDataDao: HistoryDbDao
     private val executorService: ExecutorService = Executors.newSingleThreadExecutor()
 

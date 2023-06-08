@@ -1,5 +1,6 @@
 package com.capstone.posturku.ui.profile
 
+import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,13 +11,18 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.R
 import com.capstone.posturku.ViewModelRoomFactory
 import com.capstone.posturku.data.room.profile.ProfileDb
 import com.capstone.posturku.databinding.ActivityProfileBinding
+import com.capstone.posturku.model.ProfileModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class ProfileActivity : AppCompatActivity() {
     private lateinit var personalinfo: LinearLayout
     private lateinit var experience: LinearLayout
@@ -25,13 +31,14 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var experiencebtn: TextView
     private lateinit var binding: ActivityProfileBinding
     private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var profile: ProfileDb
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         hideSystemUI()
-        profileViewModel = obtainViewModel(this@ProfileActivity)
 
         initializeViews()
         setInitialVisibility()
@@ -39,20 +46,22 @@ class ProfileActivity : AppCompatActivity() {
         setAboutMeClickListener()
         setContactClickListener()
         setInterestsClickListener()
+
+        profileViewModel = obtainViewModel(this)
         setUI()
     }
 
     override fun onDestroy() {
-        val profile = ProfileDb(
+        val profile = ProfileModel(
             aboutMe = binding.tvProfileAboutmeContent.text.toString(),
             name = binding.tvProfileName.text.toString(),
             phone = binding.tvProfilePhone.text.toString(),
-            email = binding.tvProfileEmail.text.toString(),
+            email = profile.email,
             address = binding.tvProfileAddress.text.toString(),
             skill = binding.tvProfileSkill.text.toString(),
             hobby = binding.tvProfileHobby.text.toString()
         )
-        profileViewModel.setData(profile)
+        profileViewModel.updateProfile(profile)
 
         super.onDestroy()
 
@@ -200,6 +209,8 @@ class ProfileActivity : AppCompatActivity() {
     private fun setUI(){
         profileViewModel.getProfile().observe(this) { data ->
             if(data != null){
+                profile = data
+
                 // AboutMe
                 binding.tvProfileAboutmeContent.text = data.aboutMe
 
@@ -233,5 +244,8 @@ class ProfileActivity : AppCompatActivity() {
     private fun obtainViewModel(activity: AppCompatActivity): ProfileViewModel {
         val factory = ViewModelRoomFactory.getInstance(activity.application)
         return ViewModelProvider(activity, factory).get(ProfileViewModel::class.java)
+
+//        return ViewModelProvider(this, ViewModelFactory(UserPreference.getInstance(dataStore)))[ProfileViewModelV2::class.java]
+
     }
 }

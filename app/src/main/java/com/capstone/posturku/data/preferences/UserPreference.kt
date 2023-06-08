@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.capstone.posturku.model.LoginResult
+import com.capstone.posturku.model.ProfileModel
 import com.capstone.posturku.model.UserModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -26,12 +27,39 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         }
     }
 
+    fun getProfile(): Flow<ProfileModel>{
+        return dataStore.data.map { preferences ->
+            ProfileModel(
+                preferences[ABOUTME_KEY] ?:"-",
+
+                preferences[NAME_KEY] ?:"",
+                preferences[PHONE_KEY] ?:"",
+                preferences[EMAIL_KEY] ?:"",
+                preferences[ADDRESS_KEY] ?:"",
+
+                preferences[SKILL_KEY] ?:"",
+                preferences[HOBBY_KEY] ?:"",
+            )
+        }
+    }
+
     suspend fun saveUser(user: UserModel) {
         dataStore.edit { preferences ->
             preferences[NAME_KEY] = user.name
             preferences[EMAIL_KEY] = user.email
             preferences[PASSWORD_KEY] = user.password
             preferences[STATE_KEY] = user.isLogin
+        }
+    }
+
+    suspend fun updateProfile(p: ProfileModel){
+        dataStore.edit { preferences ->
+            preferences[ABOUTME_KEY] = p.aboutMe
+            preferences[NAME_KEY] = p.name
+            preferences[PHONE_KEY] = p.phone
+            preferences[ADDRESS_KEY] = p.address
+            preferences[SKILL_KEY] = p.skill
+            preferences[HOBBY_KEY] = p.hobby
         }
     }
 
@@ -60,8 +88,16 @@ class UserPreference private constructor(private val dataStore: DataStore<Prefer
         @Volatile
         private var INSTANCE: UserPreference? = null
 
+        private val ABOUTME_KEY = stringPreferencesKey("aboutme")
+
         private val NAME_KEY = stringPreferencesKey("name")
+        private val PHONE_KEY = stringPreferencesKey("phone")
         private val EMAIL_KEY = stringPreferencesKey("email")
+        private val ADDRESS_KEY = stringPreferencesKey("address")
+
+        private val SKILL_KEY = stringPreferencesKey("skill")
+        private val HOBBY_KEY = stringPreferencesKey("hobby")
+
         private val PASSWORD_KEY = stringPreferencesKey("password")
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val STATE_KEY = booleanPreferencesKey("state")

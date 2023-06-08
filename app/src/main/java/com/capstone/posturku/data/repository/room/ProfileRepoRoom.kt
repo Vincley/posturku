@@ -1,4 +1,4 @@
-package com.capstone.posturku.data.repository
+package com.capstone.posturku.data.repository.room
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -7,13 +7,10 @@ import androidx.lifecycle.Transformations
 import com.capstone.posturku.data.room.ArticleDbRoomDatabase
 import com.capstone.posturku.data.room.profile.ProfileDb
 import com.capstone.posturku.data.room.profile.ProfileDbDao
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class ProfileRepository(application: Application) {
+class ProfileRepoRoom(application: Application) {
     private val mDataDao: ProfileDbDao
     private val executorService: ExecutorService = Executors.newSingleThreadExecutor()
 

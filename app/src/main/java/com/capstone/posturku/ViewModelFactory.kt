@@ -11,6 +11,7 @@ import com.capstone.posturku.ui.main.MainViewModel
 import com.capstone.posturku.ui.news.FavoriteViewModel
 import com.capstone.posturku.ui.news.NewsViewModel
 import com.capstone.posturku.ui.profile.ProfileViewModel
+import com.capstone.posturku.ui.profile.ProfileViewModelV2
 import com.capstone.posturku.ui.signup.SignupViewModel
 
 class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
@@ -26,6 +27,9 @@ class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.New
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(pref) as T
+            }
+            modelClass.isAssignableFrom(ProfileViewModelV2::class.java) -> {
+                ProfileViewModelV2(pref) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

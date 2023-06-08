@@ -3,11 +3,11 @@ package com.capstone.posturku.ui.news
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.capstone.posturku.data.repository.FavoriteRepository
+import com.capstone.posturku.data.repository.room.FavoriteRepoRoom
 import com.capstone.posturku.data.room.ArticleDb
 
 class FavoriteViewModel(application: Application) : ViewModel() {
-    private val mNoteRepository: FavoriteRepository = FavoriteRepository(application)
+    private val mNoteRepository: FavoriteRepoRoom = FavoriteRepoRoom(application)
 
     fun insert(note: ArticleDb) {
         mNoteRepository.insert(note)

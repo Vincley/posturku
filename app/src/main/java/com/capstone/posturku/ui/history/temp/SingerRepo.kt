@@ -49,7 +49,6 @@ class SingerRepo {
             singerList.add(Singer("Wanna One", "2017.08", "Park JiHoon", "10:11 A.M", 40, 20))
 
             singerList.add(Singer("detection", "2017.11", "Woo WonJae", "10:11 A.M", 40, 20))
-
             return singerList
         }
 }

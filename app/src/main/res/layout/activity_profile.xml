@@ -236,10 +236,10 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/lightgrey" />
+<!--                <LinearLayout-->
+<!--                    android:layout_width="1dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:background="@color/lightgrey" />-->
 
 <!--                <TextView-->
 <!--                    android:id="@+id/reviewbtn"-->

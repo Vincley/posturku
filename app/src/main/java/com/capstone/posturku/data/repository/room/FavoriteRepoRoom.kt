@@ -1,4 +1,4 @@
-package com.capstone.posturku.data.repository
+package com.capstone.posturku.data.repository.room
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -8,7 +8,7 @@ import com.capstone.posturku.data.room.ArticleDbRoomDatabase
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class FavoriteRepository(application: Application) {
+class FavoriteRepoRoom(application: Application) {
     private val mNotesDao: ArticleDbDao
     private val executorService: ExecutorService = Executors.newSingleThreadExecutor()
 

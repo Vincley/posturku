@@ -3,12 +3,11 @@ package com.capstone.posturku.ui.history
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.capstone.posturku.data.repository.HistoryRepository
+import com.capstone.posturku.data.repository.room.HistoryRepoRoom
 import com.capstone.posturku.data.room.history.HistoryDb
-import java.util.Date
 
 class HistoryViewModel(application: Application) : ViewModel() {
-    private val mRepository: HistoryRepository = HistoryRepository(application)
+    private val mRepository: HistoryRepoRoom = HistoryRepoRoom(application)
 
     fun insert(note: HistoryDb) {
         mRepository.insert(note)

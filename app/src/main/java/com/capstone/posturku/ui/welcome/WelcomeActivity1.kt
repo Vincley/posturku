@@ -10,7 +10,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import com.capstone.posturku.databinding.ActivityWelcome1Binding
-import com.capstone.posturku.ui.login.LoginActivity1
+import com.capstone.posturku.ui.login.LoginActivity
 import com.capstone.posturku.ui.signup.SignupActivity1
 
 
@@ -43,7 +43,7 @@ class WelcomeActivity1 : AppCompatActivity() {
 
     private fun setupAction() {
         binding.constraintLayout5.setOnClickListener {
-            startActivity(Intent(this, LoginActivity1::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         }
 
         binding.constraintLayout3.setOnClickListener {
