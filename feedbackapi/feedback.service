@@ -1,0 +1,8 @@
+[Unit]
+Description= You can change time text
+After=network.target
+[Service]
+User=root
+ExecStart=/home/c323dkx3991/feedbackapi/Scripts/gunicorn --bind 0.0.0.0:5000 wsgi:app
+[Install]
+WantedBy=multi-user.target
