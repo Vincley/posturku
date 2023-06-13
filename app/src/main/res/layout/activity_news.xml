@@ -44,27 +44,27 @@
                     app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/top_background" />
 
-                <EditText
-                    android:id="@+id/search_bar_news"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:drawableEnd="@drawable/search_icon"
-                    android:drawablePadding="8dp"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="4dp"
-                    android:textSize="16sp"
-                    android:layout_marginTop="16dp"
-                    android:hint="Search For..."
-                    android:textStyle="italic|bold"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:layout_marginEnd="40dp"
-                    android:layout_marginStart="40dp"
-                    android:background="@drawable/search_edittext"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+<!--                <EditText-->
+<!--                    android:id="@+id/search_bar_news"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:drawableEnd="@drawable/search_icon"-->
+<!--                    android:drawablePadding="8dp"-->
+<!--                    android:paddingStart="20dp"-->
+<!--                    android:paddingEnd="4dp"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:hint="Search For..."-->
+<!--                    android:textStyle="italic|bold"-->
+<!--                    android:ems="10"-->
+<!--                    android:inputType="textPersonName"-->
+<!--                    android:layout_marginEnd="40dp"-->
+<!--                    android:layout_marginStart="40dp"-->
+<!--                    android:background="@drawable/search_edittext"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/imageView3"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

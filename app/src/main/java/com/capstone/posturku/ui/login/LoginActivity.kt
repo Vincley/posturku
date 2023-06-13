@@ -179,7 +179,7 @@ class LoginActivity : AppCompatActivity() {
             val account: GoogleSignInAccount? =completedTask.getResult(ApiException::class.java)
             if (account != null) {
                 if(account.email != null){
-                    val result = LoginResult(account.email!!, "", "")
+                    val result = LoginResult("", "", "")
                     loginViewModel.login(result)
                     callAlert()
                 }
@@ -192,8 +192,8 @@ class LoginActivity : AppCompatActivity() {
     private fun callAlert(){
         AlertDialog.Builder(this).apply {
             setTitle("Yeah!")
-            setMessage("Anda berhasil login. Sudah tidak sabar untuk belajar ya?")
-            setPositiveButton("Lanjut") { _, _ ->
+            setMessage("You have successfully logged in. Can't wait to become more productive?")
+            setPositiveButton("Continue") { _, _ ->
                 val intent = Intent(context, MainActivity::class.java)
                 intent.flags =
                     Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK

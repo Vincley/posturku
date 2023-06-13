@@ -1,23 +1,24 @@
 package com.capstone.posturku.ml
 
-import org.tensorflow.lite.Interpreter
-import org.tensorflow.lite.gpu.GpuDelegate
+
 import android.content.Context
 import android.graphics.*
-import android.os.Environment
 import android.os.SystemClock
+import android.util.Log
 import com.capstone.posturku.data.pose.*
+import com.google.firebase.ml.modeldownloader.CustomModel
+import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions
+import com.google.firebase.ml.modeldownloader.DownloadType
+import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader
 import org.tensorflow.lite.DataType
+import org.tensorflow.lite.Interpreter
+import org.tensorflow.lite.gpu.GpuDelegate
 import org.tensorflow.lite.support.common.FileUtil
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.image.ops.ResizeWithCropOrPadOp
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.OutputStream
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -42,9 +43,7 @@ class MoveNet(private val interpreter: Interpreter, private var gpuDelegate: Gpu
         // TFLite file names.
         private const val LIGHTNING_FILENAME = "movenet_lightning.tflite"
         private const val THUNDER_FILENAME = "movenet_thunder.tflite"
-
-//        private const val LIGHTNING_FILENAME = "pose_classifier.tflite"
-//        private const val THUNDER_FILENAME = "pose_classifier.tflite"
+        private const val THUNDER_FILENAMEClOUD = "movenet_thunder"
 
         // allow specifying model type.
         fun create(context: Context, device: Device, modelType: ModelType): MoveNet {
@@ -75,6 +74,37 @@ class MoveNet(private val interpreter: Interpreter, private var gpuDelegate: Gpu
         // default to lightning.
         fun create(context: Context, device: Device): MoveNet =
             create(context, device, ModelType.Lightning)
+
+
+        private fun initInterpreter(context: Context, options: Interpreter.Options, modelType: ModelType): Interpreter {
+            val modelAssertName = if (modelType == ModelType.Lightning) LIGHTNING_FILENAME else THUNDER_FILENAME
+            val modelAssert = FileUtil.loadMappedFile(context, modelAssertName)
+
+            val conditions = CustomModelDownloadConditions.Builder()
+                .requireWifi()  // Also possible: .requireCharging() and .requireDeviceIdle()
+                .build()
+            val model = FirebaseModelDownloader.getInstance()
+                .getModel(THUNDER_FILENAMEClOUD, DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND, conditions)
+                .addOnSuccessListener { model: CustomModel? ->
+//                        // Download complete. Depending on your app, you could enable the ML
+//                        // feature, or switch from the local model to the remote model, etc.
+//                        val modelFile = model?.file
+//                        if (modelFile != null) {
+//                            Log.d("Model_from_cloud", modelFile.toString())
+//                            interpreter = Interpreter(modelFile)
+//                        }
+                }
+                .result
+            val modelFile = model?.file
+
+            return if (modelFile != null) {
+                Log.d("Model_from_clud", modelFile.toString())
+                Interpreter(modelFile)
+            } else {
+                Log.d("Model_from_assets", modelFile.toString())
+                Interpreter(modelAssert, options)
+            }
+        }
     }
 
     private var cropRegion: RectF? = null
@@ -82,42 +112,6 @@ class MoveNet(private val interpreter: Interpreter, private var gpuDelegate: Gpu
     private val inputWidth = interpreter.getInputTensor(0).shape()[1]
     private val inputHeight = interpreter.getInputTensor(0).shape()[2]
     private var outputShape: IntArray = interpreter.getOutputTensor(0).shape()
-
-
-    //region saveBitmapAsPNG()
-    // Fungsi untuk menyimpan bitmap sebagai file PNG
-//    private fun saveBitmapAsPNG(bitmap: Bitmap) : Boolean {
-//        val folderName = "Images"
-//
-//        val epochDatetime = System.currentTimeMillis()
-//        val fileName = "image_$epochDatetime.png"
-//
-//
-//        val directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-//
-//        // Create the file path
-//        val filePath = File(directory, fileName)
-//
-//        // Create the output stream and compress the bitmap into the file
-//        var outputStream: OutputStream? = null
-//        try {
-//            outputStream = FileOutputStream(filePath)
-//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-//            outputStream.flush()
-//            outputStream.close()
-//            return true
-//        } catch (e: IOException) {
-//            e.printStackTrace()
-//            return false
-//        } finally {
-//            try {
-//                outputStream?.close()
-//            } catch (e: IOException) {
-//                e.printStackTrace()
-//            }
-//        }
-//    }
-    //endregion
 
     override fun estimatePoses(bitmap: Bitmap): List<Person> {
         val inferenceStartTimeNanos = SystemClock.elapsedRealtimeNanos()
@@ -141,9 +135,6 @@ class MoveNet(private val interpreter: Interpreter, private var gpuDelegate: Gpu
                 rect.height().toInt(),
                 Bitmap.Config.ARGB_8888
             )
-            //saveBitmapAsPNG(detectBitmap)
-
-
             Canvas(detectBitmap).drawBitmap(
                 bitmap,
                 -rect.left,

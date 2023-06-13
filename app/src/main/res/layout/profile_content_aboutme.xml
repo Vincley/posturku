@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Enter Name"
+        android:hint="Enter Text ..."
         android:inputType="textMultiLine"
         android:lines="3"/>
 

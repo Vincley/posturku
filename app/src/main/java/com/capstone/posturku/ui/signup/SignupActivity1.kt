@@ -15,12 +15,15 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.R
 import com.capstone.posturku.ViewModelFactory
+import com.capstone.posturku.ViewModelRoomFactory
 import com.capstone.posturku.data.preferences.UserPreference
 import com.capstone.posturku.databinding.ActivitySignup1Binding
+import com.capstone.posturku.model.ProfileModel
 import com.capstone.posturku.model.UserModel
 import com.capstone.posturku.ui.custom.EmailEditTextCustom
 import com.capstone.posturku.ui.custom.PassEditTextCustom
 import com.capstone.posturku.ui.custom.RePassEditTextCustom
+import com.capstone.posturku.ui.profile.ProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -30,6 +33,8 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class SignupActivity1 : AppCompatActivity() {
     private lateinit var binding: ActivitySignup1Binding
     private lateinit var signupViewModel: SignupViewModel
+    private lateinit var profileViewModel: ProfileViewModel
+
 
     // create Firebase authentication object
     private lateinit var auth: FirebaseAuth
@@ -130,6 +135,11 @@ class SignupActivity1 : AppCompatActivity() {
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[SignupViewModel::class.java]
+
+        profileViewModel = ViewModelProvider(
+            this,
+            ViewModelRoomFactory.getInstance(this.application)).get(ProfileViewModel::class.java)
+
     }
 
     private fun setupAction() {
@@ -163,8 +173,20 @@ class SignupActivity1 : AppCompatActivity() {
                         binding.progressBarRegister.visibility = View.GONE
 
                         if (it.isSuccessful) {
+                            val user = it.result?.user?.uid
                             signupViewModel.saveUser(UserModel(name, email, password, false, ""))
-                            //Toast.makeText(this, "Successfully Singed Up", Toast.LENGTH_SHORT).show()
+
+                            val profile = ProfileModel(
+                                aboutMe = "",
+                                name = name,
+                                phone = "",
+                                email = email,
+                                address = "",
+                                skill = "",
+                                hobby = ""
+                            )
+                            profileViewModel.updateProfile(profile)
+
                             callAlert()
                         } else {
                             Toast.makeText(this, "Singed Up Failed!", Toast.LENGTH_SHORT).show()
@@ -178,8 +200,8 @@ class SignupActivity1 : AppCompatActivity() {
     private fun callAlert(){
         AlertDialog.Builder(this).apply {
             setTitle("Yeah!")
-            setMessage("Akunnya sudah jadi nih. Yuk, login dan mencari konveksi di kokibe.")
-            setPositiveButton("Lanjut") { _, _ ->
+            setMessage("Your account is ready. Let's login and become more productive with 'Posturku'.")
+            setPositiveButton("Continue") { _, _ ->
                 finish()
             }
             create()

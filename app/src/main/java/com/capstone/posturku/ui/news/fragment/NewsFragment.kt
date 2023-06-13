@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.posturku.ViewModelRepoFactory
 import com.capstone.posturku.adapter.NewsAdapter
 import com.capstone.posturku.data.repository.NewsRepository
+import com.capstone.posturku.data.repository.PosturkuRepository
 import com.capstone.posturku.databinding.FragmentNewsBinding
 import com.capstone.posturku.model.news.Resource
 import com.capstone.posturku.model.news.entities.Article
@@ -35,7 +36,35 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //initializing viewModel
+        GetDataArticles()
+        //getData()
+
+    }
+
+    private fun GetDataArticles(){
+        PosturkuRepository.getInstance().GetAllArticles("", object : PosturkuRepository.IListArticle{
+            override fun onSuccess(listStory: List<Article>) {
+                binding?.progressBarNews?.visibility = View.GONE
+
+                val newsAdapter = NewsAdapter(listStory)
+                binding?.rvNews?.setHasFixedSize(true)
+                binding?.rvNews?.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                binding?.rvNews?.adapter = newsAdapter
+
+                newsAdapter.setOnItemClickCallback(object : NewsAdapter.OnItemClickCallback {
+                    override fun onItemClicked(data: Article) {
+                        showSelectedArticle(data)
+                    }
+                })
+            }
+
+            override fun onFailure(errorMessage: String) {
+                binding?.progressBarNews?.visibility = View.GONE
+            }
+        })
+    }
+
+    private fun getData(){
         viewModel = ViewModelProvider(this, ViewModelRepoFactory(NewsRepository.getInstance()))[NewsViewModel::class.java]
 
         viewModel.getNews(requireContext(), "", 1, true)

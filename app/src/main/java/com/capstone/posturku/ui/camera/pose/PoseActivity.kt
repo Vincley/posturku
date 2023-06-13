@@ -167,15 +167,14 @@ class PoseActivity : AppCompatActivity() {
         }
 
 
- //        binding.switchCamera.setOnClickListener { cameraSource?.switchCamera() }
-
         initAudio()
         binding.switchCamera.setOnClickListener{
             if(IsPlayAudio){
-                StopAudio()
+                audioViewModel.stopAudio()
+
             }
             else{
-                PlayAudio()
+                audioViewModel.playAudio()
             }
 
             IsPlayAudio = !IsPlayAudio
@@ -240,7 +239,8 @@ class PoseActivity : AppCompatActivity() {
             }
             else
             {
-                mMediaPlayer?.start()}
+                mMediaPlayer?.start()
+            }
         }
     }
 

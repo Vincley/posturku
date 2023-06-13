@@ -168,7 +168,9 @@ class ProfileActivity : AppCompatActivity() {
                 val newPhone = phone?.text.toString()
                 val newAddress = address?.text.toString()
 
+                binding.tvHeaderName.text = newName
                 binding.tvProfileName.text = newName
+
                 binding.tvProfilePhone.text = newPhone
                 binding.tvProfileAddress.text = newAddress
                 bottomSheetDialog.dismiss()
@@ -210,6 +212,10 @@ class ProfileActivity : AppCompatActivity() {
         profileViewModel.getProfile().observe(this) { data ->
             if(data != null){
                 profile = data
+
+                // Header
+                binding.tvHeaderName.text = data.name
+//                binding.tvHeaderPlace.text = data.address
 
                 // AboutMe
                 binding.tvProfileAboutmeContent.text = data.aboutMe

@@ -16,6 +16,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.posturku.R
 import com.capstone.posturku.ViewModelFactory
+import com.capstone.posturku.ViewModelRoomFactory
 import com.capstone.posturku.data.preferences.UserPreference
 import com.capstone.posturku.databinding.ActivityMain1Binding
 import com.capstone.posturku.ui.aboutMe.AboutUsActivity
@@ -23,6 +24,7 @@ import com.capstone.posturku.ui.camera.pose.PoseActivity
 import com.capstone.posturku.ui.history.HistoryActivity
 import com.capstone.posturku.ui.news.NewsActivity
 import com.capstone.posturku.ui.profile.ProfileActivity
+import com.capstone.posturku.ui.profile.ProfileViewModel
 import com.capstone.posturku.ui.welcome.WelcomeActivity1
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.appcheck.FirebaseAppCheck
@@ -39,6 +41,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var profileViewModel: ProfileViewModel
     private lateinit var binding: ActivityMain1Binding
     private lateinit var auth: FirebaseAuth
 
@@ -77,6 +80,12 @@ class MainActivity : AppCompatActivity() {
             ViewModelFactory(UserPreference.getInstance(dataStore))
         )[MainViewModel::class.java]
 
+        profileViewModel = ViewModelProvider(
+            this,
+            ViewModelRoomFactory.getInstance(this.application)).get(ProfileViewModel::class.java)
+
+
+
         auth = Firebase.auth
         mainViewModel.getUser().observe(this, { user ->
             if (user.isLogin){
@@ -86,12 +95,18 @@ class MainActivity : AppCompatActivity() {
 //
 //                     }
 //                 }
-                binding.tvMainBackgroundTop1.text = user.name
             } else {
                 startActivity(Intent(this, WelcomeActivity1::class.java))
                 finish()
             }
         })
+
+        profileViewModel.getProfile().observe(this) { data ->
+            if(data != null){
+                binding.tvMainBackgroundTop1.text = data.name
+
+            }
+        }
     }
 
     private fun setupAction() {

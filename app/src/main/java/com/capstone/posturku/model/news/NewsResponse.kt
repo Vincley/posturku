@@ -14,3 +14,14 @@ data class NewsResponse(
     @field:SerializedName("articles")
     val articles: List<Article>?
 ) : Parcelable
+
+
+@Parcelize
+data class ArticleResponse(
+    @field:SerializedName("message")
+    val message: String?,
+    @field:SerializedName("success")
+    val success: Boolean?,
+    @field:SerializedName("listArticles")
+    val listArticles: List<Article>?
+) : Parcelable

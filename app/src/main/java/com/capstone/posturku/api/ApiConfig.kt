@@ -8,7 +8,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
+
+
     companion object{
+//        private val baseUrl = "https://story-api.dicoding.dev/v1/"
+        private val baseUrl = "http://34.101.45.64:5000/"
 
         fun getApiService(): ApiService {
 
@@ -34,7 +38,7 @@ class ApiConfig {
                 .addInterceptor(loggingInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://story-api.dicoding.dev/v1/")
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
