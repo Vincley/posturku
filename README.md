@@ -13,9 +13,6 @@
   <img src="https://github.com/Vincley/posturku/blob/main/ss/Login Empty.jpg?raw=true" width="256" alt="Login">
 </p>
 
-# Demo Application
-&#x1F514; 
-(https://youtu.be/6l1-98ljtic)
 
 # Our Member
 |            Member           | Student ID |        Path        |
