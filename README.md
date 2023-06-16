@@ -13,6 +13,6 @@
   <img src="https://github.com/Vincley/posturku/blob/main/ss/Login Empty.jpg?raw=true" width="256" alt="Login">
 </p>
 
-<p align="center">
-  ![Demo Aplikasi](https://youtu.be/6l1-98ljtic)
-</p>
+<video controls>
+        <source src="https://youtu.be/6l1-98ljtic" type="video/mp4">
+</video>
