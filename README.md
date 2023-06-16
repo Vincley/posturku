@@ -14,7 +14,8 @@
 </p>
 
 # Demo Application
-[![Youtube](https://img.shields.io/badge/Figma-Our%20Design-success)](https://youtu.be/6l1-98ljtic)
+&#x1F514; 
+(https://youtu.be/6l1-98ljtic)
 
 # Our Member
 |            Member           | Student ID |        Path        |
