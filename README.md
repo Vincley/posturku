@@ -13,6 +13,9 @@
   <img src="https://github.com/Vincley/posturku/blob/main/ss/Login Empty.jpg?raw=true" width="256" alt="Login">
 </p>
 
+# Our Design Web
+[![figma](https://img.shields.io/badge/Figma-Our%20Design-success)](https://www.figma.com/file/R6ufMOr35QpxgZan5vPWWc/Yourney-Website?node-id=283%3A104&t=KkwOIjoXJC62ee9r-0)
+
 # Our Member
 |            Member           | Student ID |        Path        |
 | :-------------------------: | :--------: | :----------------: |
