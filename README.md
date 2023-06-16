@@ -13,6 +13,12 @@
   <img src="https://github.com/Vincley/posturku/blob/main/ss/Login Empty.jpg?raw=true" width="256" alt="Login">
 </p>
 
-<video controls>
-        <source src="https://youtu.be/6l1-98ljtic" type="video/mp4">
-</video>
+# Our Member
+|            Member           | Student ID |        Path        |
+| :-------------------------: | :--------: | :----------------: |
+|          Nur Mahin          | A361DSX1058|  Mobile Developer  |
+|      Fany Zahra Hanifa      | M013DSY0584|  Machine Learning  |
+|    Desti Mustika Safitri    | M340DSY0189|  Machine Learning  |
+|    Latansa Tsabbita Mahmudi | M295DSY2839|  Machine Learning  |
+|        Vincent Wizley       | C323DKX3991|   Cloud Computing  |
+|   Mohd. At Thariq Okadiksi  | C230DSX3428|   Cloud Computing  |
