@@ -14,7 +14,7 @@
 </p>
 
 # Our Design Web
-[![figma](https://img.shields.io/badge/Figma-Our%20Design-success)](https://www.figma.com/file/R6ufMOr35QpxgZan5vPWWc/Yourney-Website?node-id=283%3A104&t=KkwOIjoXJC62ee9r-0)
+[![Youtube](https://img.shields.io/badge/Figma-Our%20Design-success)](https://youtu.be/6l1-98ljtic)
 
 # Our Member
 |            Member           | Student ID |        Path        |
